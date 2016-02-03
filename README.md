@@ -12,10 +12,12 @@
 
 部分动画效果：
 
+动画效果1：
 <p align="center" >
 <img src="http://upload-images.jianshu.io/upload_images/1255171-07889b069ecc1427.gif" width="266" height="500"/>
 </p>
 
+动画效果2：
 <p align="center" >
 <img src="http://upload-images.jianshu.io/upload_images/1255171-34621cd10ae0c1c2.gif" width="266" height="500"/>
 </p>
