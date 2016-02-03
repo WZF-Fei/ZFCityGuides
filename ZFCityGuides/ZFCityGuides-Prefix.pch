@@ -1,0 +1,35 @@
+//
+//  ZFCityGuides-Prefix.pch
+//  ZFCityGuides
+//
+//  Created by macOne on 16/1/22.
+//  Copyright (c) 2015年 wzhf. All rights reserved.
+//
+
+#import <Availability.h>
+
+
+#ifndef __IPHONE_3_0
+#warning "This project uses features only available in iOS SDK 3.0 and later."
+#endif
+/**
+ *  预加载文件：应用启动时会优先加载该文件
+ */
+#ifdef __OBJC__
+
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+
+#import "GlobalFunction.h"
+
+#import "ConstantValue.h"
+#import "AppDelegate.h"
+#import <pop/POP.h>
+
+
+#import "UIImage+UIColor.h"
+#import "BaseViewController.h"
+#import "NavigationAnimationViewController.h"
+
+#endif
+
