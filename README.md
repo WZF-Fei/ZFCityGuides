@@ -22,3 +22,9 @@
 <img src="http://upload-images.jianshu.io/upload_images/1255171-34621cd10ae0c1c2.gif" width="266" height="500"/>
 </p>
 
+动画效果3：
+
+<p align="center" >
+<img src="http://upload-images.jianshu.io/upload_images/1255171-e55dedda1d88e9c8.gif" width="266" height="500"/>
+</p>
+
