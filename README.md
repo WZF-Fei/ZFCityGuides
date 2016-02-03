@@ -13,6 +13,6 @@
 部分动画效果：
 
 <p align="center" >
-<img src="http://upload-images.jianshu.io/upload_images/1255171-07889b069ecc1427.gif?imageMogr2/auto-orient/strip" width="266" height="500"/>
+<img src="http://upload-images.jianshu.io/upload_images/1255171-07889b069ecc1427.gif" width="266" height="500"/>
 </p>
 
