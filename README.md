@@ -16,3 +16,7 @@
 <img src="http://upload-images.jianshu.io/upload_images/1255171-07889b069ecc1427.gif" width="266" height="500"/>
 </p>
 
+<p align="center" >
+<img src="http://upload-images.jianshu.io/upload_images/1255171-34621cd10ae0c1c2.gif" width="266" height="500"/>
+</p>
+
