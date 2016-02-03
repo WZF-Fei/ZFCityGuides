@@ -12,4 +12,7 @@
 
 部分动画效果：
 
-[ZFCityGuides-1.gif](http://upload-images.jianshu.io/upload_images/1255171-07889b069ecc1427.gif?imageMogr2/auto-orient/strip)
+<p align="center" >
+<img src="http://upload-images.jianshu.io/upload_images/1255171-07889b069ecc1427.gif?imageMogr2/auto-orient/strip" width="266" height="500"/>
+</p>
+
