@@ -49,7 +49,7 @@
 
 #define TitleBoldFontName @"TrumpGothicEast-Bold"
 
-#define TitleFontName @"TrumpGothicEast"
+#define TitleFontName @"FilmotypeGiant"
 
 #define BodyFontName @"HelveticaNeue-Bold"
 

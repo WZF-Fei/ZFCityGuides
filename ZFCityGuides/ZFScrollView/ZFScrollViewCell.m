@@ -71,7 +71,7 @@
     UILabel *contenName = [UILabel new];
     contenName.backgroundColor = kControlBgColor;
     contenName.textColor = kTextlightBlueColor;
-    contenName.font = [UIFont fontWithName:TitleBoldFontName size:22.0];
+    contenName.font = [UIFont fontWithName:TitleBoldFontName size:30.0];
     contenName.textAlignment = NSTextAlignmentCenter;
     contenName.frame = CGRectMake(0, CGRectGetMaxY(imageView.frame) + 20, self.frame.size.width - 30*2, 50);
     contenName.text = [_dictionary[@"name"] uppercaseString];

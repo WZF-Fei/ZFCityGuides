@@ -292,7 +292,25 @@
         _itemCellIcons = [[NSArray alloc] init];
     }
     
-    _itemCellIcons = @[@"konw",@"essential",@"interset",@"photos",@"gifts",@"drink",@"what",@"document",@"secret"];
+    _itemCellIcons =@[ @{@"tabBarName"  : @"do you konw?",
+                         @"tabIcon"     : @"dyk"},
+                       @{@"tabBarName"  : @"essentials",
+                         @"tabIcon"     : @"essentials"},
+                       @{@"tabBarName"  : @"my favorites",
+                         @"tabIcon"     : @"favorites"},
+                       @{@"tabBarName"  : @"photos",
+                         @"tabIcon"     : @"photos"},
+                       @{@"tabBarName"  : @"walks",
+                         @"tabIcon"     : @"walks"},
+                       @{@"tabBarName"  : @"food & drink",
+                         @"tabIcon"     : @"food"},
+                       @{@"tabBarName"  : @"what to do",
+                         @"tabIcon"     : @"wtd"},
+                       @{@"tabBarName"  : @"my itineraries",
+                         @"tabIcon"     : @"itineraries"},
+                       @{@"tabBarName"  : @"secrets",
+                         @"tabIcon"     : @"secrets"}];
+  
     
     return _itemCellIcons;
 }
@@ -336,8 +354,8 @@
         
     cell.contentView.backgroundColor = kTabItemBgNormal;
     
-    cell.itemImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_normal",self.itemCellIcons[indexPath.row]]];
-    cell.itemNameLabel.text = [self.itemCellIcons[indexPath.row] uppercaseString];
+    cell.itemImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"main-menu-iphone-%@@2x",self.itemCellIcons[indexPath.row][@"tabIcon"]]];
+    cell.itemNameLabel.text = [self.itemCellIcons[indexPath.row][@"tabBarName"] uppercaseString];
     cell.tag = indexPath.row;
     return cell;
   
@@ -401,8 +419,8 @@
 {
     TabBarItemCell *itemCell = (TabBarItemCell *)collectionCell;
     
-    NSString *strNormalImage =[NSString stringWithFormat:@"%@_normal",self.itemCellIcons[indexPath.row]];
-    NSString *strSelectedImage = [NSString stringWithFormat:@"%@_selected",self.itemCellIcons[indexPath.row]];
+    NSString *strNormalImage =[NSString stringWithFormat:@"main-menu-iphone-%@@2x",self.itemCellIcons[indexPath.row][@"tabIcon"]];
+    NSString *strSelectedImage = [NSString stringWithFormat:@"main-menu-iphone-%@-selected@2x",self.itemCellIcons[indexPath.row][@"tabIcon"]];
     
     itemCell.itemImageView.image = selected ? [UIImage imageNamed:strSelectedImage] : [UIImage imageNamed:strNormalImage];
     itemCell.itemNameLabel.textColor = selected ? [UIColor whiteColor] : kTabItemTextNormal;

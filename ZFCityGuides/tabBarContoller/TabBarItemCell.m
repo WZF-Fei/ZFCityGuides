@@ -23,8 +23,9 @@
 }
 
 -(void)initSubViews{
+    CGSize size = self.itemImageView.image.size;
     
-    self.itemImageView.frame = CGRectMake((self.frame.size.width - self.frame.size.height *0.35)/2, (self.frame.size.height *0.5)/2, self.frame.size.height *0.35, self.frame.size.height *0.35);
+    self.itemImageView.frame = CGRectMake((self.frame.size.width - size.width)/2, (self.frame.size.height *0.5)/2, size.width, size.height);
     [self addSubview:self.itemImageView];
     
     self.itemNameLabel.frame = CGRectMake(0, CGRectGetMaxY(self.itemImageView.frame) +5 , self.frame.size.width, 30);
@@ -34,6 +35,12 @@
     [self addSubview:self.itemNameLabel];
 
 
+}
+-(void)layoutSubviews{
+    
+    [super layoutSubviews];
+    
+    [self initSubViews];
 }
 
 #pragma mark -setter 

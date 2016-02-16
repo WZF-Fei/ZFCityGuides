@@ -30,7 +30,7 @@
     
     [self createNavigationBarWithStyle:NavigationStyleLeftAndMid
                              leftImage:nil
-                              midImage:[UIImage imageNamed:@"essential_selected"]
+                              midImage:[UIImage imageNamed:@"main-menu-iphone-essentials-selected@2x"]
                             rightImage:nil];
     
     [self initViews];
@@ -45,7 +45,7 @@
     smallLeftView.layer.cornerRadius = 5;
     smallLeftView.layer.borderWidth = 0.5;
     smallLeftView.backgroundColor = kSmallViewBgColor;
-    smallLeftView.frame = CGRectMake(10, CGRectGetMaxY(self.navigationBarView.frame), width, 200);
+    smallLeftView.frame = CGRectMake(10, CGRectGetMaxY(self.navigationBarView.frame) + 10, width, 200);
     smallLeftView.userInteractionEnabled = YES;
     [self.view addSubview:smallLeftView];
     
@@ -53,10 +53,10 @@
     [smallLeftView addGestureRecognizer:tapLeftGesture];
     
     UIImageView *leftImageView = [UIImageView new];
-    NSString *strPath = [[NSBundle mainBundle] pathForResource:@"essential" ofType:@"jpg"];
+    NSString *strPath = [[NSBundle mainBundle] pathForResource:@"statistics-hero@2x" ofType:@"png"];
     UIImage *image =[UIImage imageWithContentsOfFile:strPath];
     leftImageView.image = image;
-    leftImageView.frame = CGRectMake(0, 40, width, 90);
+    leftImageView.frame = CGRectMake(10, 10, smallLeftView.frame.size.width - 10*2, image.size.height + 10);
     [smallLeftView addSubview:leftImageView];
 
     
@@ -68,7 +68,7 @@
     [leftBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     leftBtn.titleLabel.font = [UIFont fontWithName:BodyFontName size:12.0] ;
     leftBtn.backgroundColor = [UIColor blackColor];
-    leftBtn.frame = CGRectMake(10, CGRectGetMaxY(leftImageView.frame) + 20, CGRectGetWidth(smallLeftView.frame) - 10*2, 40);
+    leftBtn.frame = CGRectMake(10, CGRectGetMaxY(leftImageView.frame) + 20, CGRectGetWidth(smallLeftView.frame) - 10*2, 50);
     leftBtn.userInteractionEnabled = NO;
     [smallLeftView addSubview:leftBtn];
     
@@ -77,7 +77,7 @@
     smallRightView.layer.cornerRadius = 5;
     smallRightView.layer.borderWidth = 0.5;
     smallRightView.backgroundColor = kSmallViewBgColor;
-    smallRightView.frame = CGRectMake(CGRectGetMaxX(smallLeftView.frame) + 10, CGRectGetMaxY(self.navigationBarView.frame), width, 200);
+    smallRightView.frame = CGRectMake(CGRectGetMaxX(smallLeftView.frame) + 10, CGRectGetMaxY(self.navigationBarView.frame)+10, width, 200);
     [self.view addSubview:smallRightView];
     
     UITapGestureRecognizer *tapRightGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ActionRightView:)];
@@ -102,11 +102,12 @@
     RightBtn.titleLabel.font = [UIFont fontWithName:BodyFontName size:12.0] ;
     RightBtn.backgroundColor = [UIColor blackColor];
     RightBtn.userInteractionEnabled = NO;
-    RightBtn.frame = CGRectMake(10, CGRectGetMaxY(rightLabel.frame) + 20, CGRectGetWidth(smallRightView.frame) - 10*2, 40);
+    RightBtn.frame = CGRectMake(10, CGRectGetMinY(leftBtn.frame) ,CGRectGetWidth(smallRightView.frame) - 10*2, 50);
     [smallRightView addSubview:RightBtn];
     
     UITableView *tableView = [UITableView new];
     tableView.backgroundColor = kTableViewCellBgColor;
+    tableView.scrollEnabled = NO;
     tableView.delegate = self;
     tableView.dataSource = self;
     tableView.showsVerticalScrollIndicator = YES;
@@ -114,6 +115,17 @@
     [self.view addSubview:tableView];
     
     _cellHeight = CGRectGetHeight(tableView.frame) /3.0;
+    
+    //IOS7
+    if ([tableView respondsToSelector:@selector(setSeparatorInset:)])
+    {
+        [tableView setSeparatorInset:UIEdgeInsetsZero];
+    }
+    //IOS8
+    if ([tableView respondsToSelector:@selector(setLayoutMargins:)])
+    {
+        [tableView setLayoutMargins:UIEdgeInsetsZero];
+    }
     
 }
 
@@ -123,7 +135,12 @@
         _dataArray = [NSArray new];
     }
     
-    _dataArray = @[@"Travel Info",@"News",@"About"];
+    _dataArray = @[@{ @"name" : @"Travel Info",
+                      @"icon" : @"essentials"},
+                   @{ @"name" : @"News",
+                      @"icon" : @"news"},
+                   @{ @"name" : @"About",
+                      @"icon" : @"about"}];
     
     return _dataArray;
 }
@@ -156,6 +173,17 @@
     return _cellHeight;
 }
 
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)])
+    {
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)])
+    {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
+}
 
 #pragma mark -UITableViewDataSource
 
@@ -172,9 +200,10 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
     }
-    cell.textLabel.textColor = kSmallViewBgColor;
-    cell.textLabel.font = [UIFont fontWithName:BodyFontName size:20.0];
-    cell.textLabel.text = self.dataArray[indexPath.row];
+    cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@-icon",self.dataArray[indexPath.row][@"icon"]]];
+    cell.textLabel.textColor = kUIColorFromRGB(0x3f484b);
+    cell.textLabel.font = [UIFont fontWithName:BodyFontName size:25.0];
+    cell.textLabel.text = self.dataArray[indexPath.row][@"name"];
     return cell;
 }
 

@@ -159,11 +159,12 @@
     [midBtn setTitle:self.navigationTitle forState:UIControlStateNormal];
     [midBtn setFrame:CGRectMake(150/2, 0 ,  _navigationBarView.frame.size.width - 150 , _navigationBarView.frame.size.height)];
     
-    UIImage * moreImage = [self.midItemImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    [midBtn setImage:moreImage forState:UIControlStateNormal];
+    UIImage * midImage = [self.midItemImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+//    midImage.size = midImage.size;
+    [midBtn setImage:midImage forState:UIControlStateNormal];
     
     if (self.navigationTitle) {
-        midBtn.imageEdgeInsets = UIEdgeInsetsMake(12, 0, 12, 15);
+        midBtn.imageEdgeInsets = UIEdgeInsetsMake(10, 0, 10, 15);
     }
 
     [_navigationBarView addSubview:midBtn];
