@@ -35,6 +35,8 @@ static const CGFloat gapWidth = 10.0f;
 
 @property (nonatomic, copy) NSMutableArray *subItemViews;
 
+@property (nonatomic, strong) NSString *animationKey;
+
 @end
 
 @implementation ZFSliderAnimationView
@@ -127,7 +129,7 @@ static const CGFloat gapWidth = 10.0f;
     header.titleLabel.font = [UIFont fontWithName:BodyFontName size:11.0f];
     [contenView addSubview:header];
     
-
+    _animationKey = item.headerTitle;
     CGFloat footerOrignY = 0.0f;
     if (customView) {
         _customView = customView;
@@ -139,7 +141,7 @@ static const CGFloat gapWidth = 10.0f;
         
         _contentLabel = [UILabel new];
         _contentLabel.textAlignment = NSTextAlignmentCenter;
-        _contentLabel.frame = CGRectMake(0, CGRectGetMaxY(header.frame) + 10, contenView.frame.size.width, 60);
+        _contentLabel.frame = CGRectMake(0, CGRectGetMaxY(header.frame) + 15, contenView.frame.size.width, 60);
         _contentLabel.font = [UIFont fontWithName:TitleFontName size:60.0];
         _contentLabel.textColor = kTextlightGrayColor;
         _contentLabel.text = @"0";
@@ -147,11 +149,12 @@ static const CGFloat gapWidth = 10.0f;
         footerOrignY = CGRectGetMaxY(_contentLabel.frame);
         
         CGFloat toValue = [item.content floatValue];
+
         if ([item.content rangeOfString:@"."].length >1) {
-            [self animatedForLabel:_contentLabel forKey:@"content" fromValue:0 toValue:toValue decimal:YES];
+            [self animatedForLabel:_contentLabel forKey:_animationKey fromValue:0 toValue:toValue decimal:YES];
         }
         else{
-            [self animatedForLabel:_contentLabel forKey:@"content" fromValue:0 toValue:toValue decimal:NO];
+            [self animatedForLabel:_contentLabel forKey:_animationKey fromValue:0 toValue:toValue decimal:NO];
         }
     }
 
@@ -199,18 +202,20 @@ static const CGFloat gapWidth = 10.0f;
     
     _contentLabel = [UILabel new];
     _contentLabel.textAlignment = NSTextAlignmentCenter;
-    _contentLabel.frame = CGRectMake(0, CGRectGetMaxY(header.frame) + 10, contenView.frame.size.width, 60);
+    _contentLabel.frame = CGRectMake(0, CGRectGetMaxY(header.frame) + 15, contenView.frame.size.width, 60);
     _contentLabel.font = [UIFont fontWithName:TitleFontName size:60.0];
     _contentLabel.textColor = kTextlightGrayColor;
     _contentLabel.text = @"0";
     [contenView addSubview:_contentLabel];
     
+    //关键key
+    _animationKey = item.headerTitle;
     CGFloat toValue = [item.content floatValue];
     if ([item.content rangeOfString:@"."].length >0) {
-        [self animatedForLabel:_contentLabel forKey:@"content" fromValue:0 toValue:toValue decimal:YES];
+        [self animatedForLabel:_contentLabel forKey:_animationKey fromValue:0 toValue:toValue decimal:YES];
     }
     else{
-        [self animatedForLabel:_contentLabel forKey:@"content" fromValue:0 toValue:toValue decimal:NO];
+        [self animatedForLabel:_contentLabel forKey:_animationKey fromValue:0 toValue:toValue decimal:NO];
     }
     
 
@@ -273,8 +278,7 @@ static const CGFloat gapWidth = 10.0f;
 }
 
 -(void)updateAnimationView:(CGFloat)percent{
-    
-    
+
     if (self.animation == ZFSliderItemAnimationLeft) {
 
         UIView *contentView = self.subviews[0];
@@ -291,6 +295,8 @@ static const CGFloat gapWidth = 10.0f;
         contentView.frame = frame;
     }
     else if (self.animation == ZFSliderItemAnimationBoth){
+        
+        
         NSAssert(self.items.count > 1, @"count can't less than two");
         
         //此处只演示2个items
@@ -343,16 +349,6 @@ static const CGFloat gapWidth = 10.0f;
 }
 
 
--(void)layoutSubviews{
-    [super layoutSubviews];
-    
-    [self updateSubviews];
-}
-
--(void)updateSubviews{
-    
-    
-}
 
 -(void)animatedForLabel:(UILabel *)label forKey:(NSString *)key fromValue:(CGFloat)fromValue toValue:(CGFloat) toValue decimal:(BOOL)decimal{
     

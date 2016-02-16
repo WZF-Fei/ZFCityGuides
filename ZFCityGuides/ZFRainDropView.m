@@ -81,7 +81,7 @@
     _secondAvgRainDropLabel.textAlignment = NSTextAlignmentCenter;
     _secondAvgRainDropLabel.font = [UIFont fontWithName:BodyFontName size:30.0];
     _secondAvgRainDropLabel.textColor = kUIColorFromRGB(0xfed1be);
-    _secondAvgRainDropLabel.frame = CGRectMake(0, CGRectGetMaxY(_firstAvgRainDropLabel.frame) + 20, 90, 30);
+    _secondAvgRainDropLabel.frame = CGRectMake(0, CGRectGetMaxY(_firstAvgRainDropLabel.frame) + 30, 90, 30);
     [self addSubview:_secondAvgRainDropLabel];
     
     toValue = 4.1;
@@ -123,7 +123,7 @@
         [rainDrop setImage:[UIImage imageNamed:@"statistics-raindrop-yellow@2x"] forState:UIControlStateNormal];
         rainDrop.tag = i;
         rainDrop.enabled = NO;
-        rainDrop.frame = CGRectMake(25 * i + CGRectGetMaxX(_secondAvgRainDropLabel.frame), CGRectGetMaxY(_firstAvgRainDropLabel.frame) + 20, 35 , 35);
+        rainDrop.frame = CGRectMake(25 * i + CGRectGetMaxX(_secondAvgRainDropLabel.frame), CGRectGetMaxY(_firstAvgRainDropLabel.frame) + 30, 35 , 35);
         [self.secondRainDropIcons addObject:rainDrop];
         [self addSubview:rainDrop];
     }

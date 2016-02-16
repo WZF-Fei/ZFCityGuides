@@ -46,6 +46,7 @@
 
 -(void)addSubViewOnScrollView{
     
+    static const CGFloat slideViewHeight = 140.0;
     _subViewsArray = [NSMutableArray array];
     CGRect frame = self.view.frame;
     UIScrollView *scrollView = [UIScrollView new];
@@ -71,12 +72,12 @@
     item2.footerTitle = @"FEET";
     
     
-    ZFSliderAnimationView *animationView1 = [self createAnimationView:120.0
+    ZFSliderAnimationView *animationView1 = [self createAnimationView:slideViewHeight
                                                                style:ZFSliderStyleMultiple
                                                          customViews:nil
                                                       animationItems:@[item1,item2]];
     animationView1.animation = ZFSliderItemAnimationBoth;
-    animationView1.frame = CGRectMake(0, 0, self.view.frame.size.width, 120);
+    animationView1.frame = CGRectMake(0, 0, self.view.frame.size.width, slideViewHeight);
     
     height += animationView1.frame.size.height + 10;
     
@@ -89,13 +90,13 @@
     gradientView.lowTemperature = 37;
     gradientView.highTemperature = 69;
     
-    ZFSliderAnimationView *animationView2 = [self createAnimationView:90.0
+    ZFSliderAnimationView *animationView2 = [self createAnimationView:100.0
                                                                 style:ZFSliderStyleView
                                                           customViews:@[gradientView]
                                                        animationItems:@[item3]];
     
     animationView2.animation = ZFSliderItemAnimationLeft;
-    animationView2.frame = CGRectMake(0, CGRectGetMaxY(animationView1.frame) + 10, self.view.frame.size.width, 90);
+    animationView2.frame = CGRectMake(0, CGRectGetMaxY(animationView1.frame) + 10, self.view.frame.size.width, 100);
     height += animationView2.frame.size.height + 10;
     
     //=========================animationView3
@@ -105,13 +106,13 @@
     
     ZFRainDropView *rainDropView = [[ZFRainDropView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 100)];
     
-    ZFSliderAnimationView *animationView3 = [self createAnimationView:150.0
+    ZFSliderAnimationView *animationView3 = [self createAnimationView:170.0
                                                                 style:ZFSliderStyleView
                                                           customViews:@[rainDropView]
                                                        animationItems:@[item4]];
     
     animationView3.animation = ZFSliderItemAnimationRight;
-    animationView3.frame = CGRectMake(0, CGRectGetMaxY(animationView2.frame) + 10, self.view.frame.size.width, 150);
+    animationView3.frame = CGRectMake(0, CGRectGetMaxY(animationView2.frame) + 10, self.view.frame.size.width, 170);
     height += animationView3.frame.size.height + 10;
     
     //=========================animationView4
@@ -126,12 +127,12 @@
     item6.showDetail = YES;
     
     
-    ZFSliderAnimationView *animationView4 = [self createAnimationView:120.0
+    ZFSliderAnimationView *animationView4 = [self createAnimationView:slideViewHeight
                                                                 style:ZFSliderStyleMultiple
                                                           customViews:nil
                                                        animationItems:@[item5,item6]];
     animationView4.animation = ZFSliderItemAnimationBoth;
-    animationView4.frame = CGRectMake(0, CGRectGetMaxY(animationView3.frame) + 10, self.view.frame.size.width, 120);
+    animationView4.frame = CGRectMake(0, CGRectGetMaxY(animationView3.frame) + 10, self.view.frame.size.width, slideViewHeight);
     height += animationView4.frame.size.height + 10;
     
     //=========================animationView5
@@ -147,12 +148,12 @@
     item8.showDetail = YES;
     
     
-    ZFSliderAnimationView *animationView5 = [self createAnimationView:120.0
+    ZFSliderAnimationView *animationView5 = [self createAnimationView:slideViewHeight
                                                                 style:ZFSliderStyleMultiple
                                                           customViews:nil
                                                        animationItems:@[item7,item8]];
     animationView5.animation = ZFSliderItemAnimationBoth;
-    animationView5.frame = CGRectMake(0, CGRectGetMaxY(animationView4.frame) + 10, self.view.frame.size.width, 120);
+    animationView5.frame = CGRectMake(0, CGRectGetMaxY(animationView4.frame) + 10, self.view.frame.size.width, slideViewHeight);
     height += animationView5.frame.size.height +10;
     
     //=========================animationView6
@@ -160,12 +161,12 @@
     item9.headerTitle = @"TOTAL COUNTRY POP.";
     item9.content = @"63395580";
     
-    ZFSliderAnimationView *animationView6 = [self createAnimationView:120.0
+    ZFSliderAnimationView *animationView6 = [self createAnimationView:slideViewHeight
                                                                 style:ZFSliderStyleNormal
                                                           customViews:nil
                                                        animationItems:@[item9]];
     animationView6.animation = ZFSliderItemAnimationLeft;
-    animationView6.frame = CGRectMake(0, CGRectGetMaxY(animationView5.frame) + 10, self.view.frame.size.width, 120);
+    animationView6.frame = CGRectMake(0, CGRectGetMaxY(animationView5.frame) + 10, self.view.frame.size.width, slideViewHeight);
     height += animationView6.frame.size.height + 10;
     
     //=========================animationView7
@@ -256,6 +257,7 @@
 
         
         ZFSliderAnimationView *sliderView = (ZFSliderAnimationView *)subView;
+
         
         UIView *middleView = nil;
         
@@ -277,7 +279,7 @@
             }
             [sliderView updateAnimationView:percent];
 
-            
+
         }
         else if (bContainedBottomView){
 
