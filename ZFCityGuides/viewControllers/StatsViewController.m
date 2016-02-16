@@ -9,6 +9,7 @@
 #import "StatsViewController.h"
 #import "ZFSliderAnimationView.h"
 #import "ZFRainDropView.h"
+#import "ZFGradientView.h"
 
 @interface StatsViewController ()<UIScrollViewDelegate>
 
@@ -83,11 +84,14 @@
     ZFSliderAnimationItem *item3 = [ZFSliderAnimationItem new];
     item3.headerTitle = @"AVG TEMPERATURE ( °F )";
     
-    UIView *CustomView = [self CreatGradientView];
+//    UIView *CustomView = [self CreatGradientView];
+    ZFGradientView *gradientView = [[ZFGradientView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 90)];
+    gradientView.lowTemperature = 37;
+    gradientView.highTemperature = 69;
     
     ZFSliderAnimationView *animationView2 = [self createAnimationView:90.0
                                                                 style:ZFSliderStyleView
-                                                          customViews:@[CustomView]
+                                                          customViews:@[gradientView]
                                                        animationItems:@[item3]];
     
     animationView2.animation = ZFSliderItemAnimationLeft;
