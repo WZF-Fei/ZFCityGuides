@@ -8,7 +8,7 @@
 
 #import "StatsViewController.h"
 #import "ZFSliderAnimationView.h"
-#import "RainDropView.h"
+#import "ZFRainDropView.h"
 
 @interface StatsViewController ()<UIScrollViewDelegate>
 
@@ -99,7 +99,7 @@
     item4.headerTitle = @"AVG. PRECIPITATION ( in )";
 
     
-    RainDropView *rainDropView = [[RainDropView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 100)];
+    ZFRainDropView *rainDropView = [[ZFRainDropView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 100)];
     
     ZFSliderAnimationView *animationView3 = [self createAnimationView:150.0
                                                                 style:ZFSliderStyleView
@@ -168,7 +168,7 @@
     ZFSliderAnimationItem *item10 = [ZFSliderAnimationItem new];
     item10.headerTitle = @"CITY POP.AS A % OF TOTAL COUNTRY";
     
-    RainDropView *rainDropView2 = [[RainDropView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 100)];
+    ZFRainDropView *rainDropView2 = [[ZFRainDropView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 100)];
 //    UIView *CustomView2 = [UIView new];
 //    CustomView2.backgroundColor = [UIColor orangeColor];
 //    CustomView2.frame = CGRectMake(0, 0, self.view.frame.size.width, 200);

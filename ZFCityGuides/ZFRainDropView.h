@@ -1,5 +1,5 @@
 //
-//  RainDropView.h
+//  ZFRainDropView.h
 //  ZFCityGuides
 //
 //  Created by macOne on 16/2/15.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RainDropView : UIView
+@interface ZFRainDropView : UIView
 
 -(instancetype)initWithFrame:(CGRect)frame;
 

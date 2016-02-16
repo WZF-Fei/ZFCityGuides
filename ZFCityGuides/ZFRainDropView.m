@@ -1,14 +1,14 @@
 //
-//  RainDropView.m
+//  ZFRainDropView.m
 //  ZFCityGuides
 //
 //  Created by macOne on 16/2/15.
 //  Copyright © 2016年 WZF. All rights reserved.
 //
 
-#import "RainDropView.h"
+#import "ZFRainDropView.h"
 
-@interface RainDropView ()
+@interface ZFRainDropView ()
 
 
 @property (nonatomic, strong) NSMutableArray *firstRainDropIcons;
@@ -21,7 +21,7 @@
 
 @end
 
-@implementation RainDropView
+@implementation ZFRainDropView
 
 -(instancetype)init{
     
