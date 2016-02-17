@@ -27,6 +27,13 @@ typedef NS_ENUM(NSInteger, ZFSliderItemAnimation) {
     ZFSliderItemAnimationBoth
 
 };
+
+typedef NS_ENUM(NSInteger, ZFScrollPosition) {
+    
+    ZFScrollPositionUp,
+    ZFScrollPositionDown
+    
+};
 typedef NS_OPTIONS(NSUInteger, ZFItemTypeOption) {
     ZFItemTypeOptionNone        = 0,
     ZFItemTypeOptionNoHeader    = 1 << 0,
@@ -40,6 +47,8 @@ typedef NS_OPTIONS(NSUInteger, ZFItemTypeOption) {
 
 @property (nonatomic,strong) NSString *content;
 
+@property (nonatomic,strong) NSString *tempContent; //用于临时存放变量
+
 @property (nonatomic,strong) NSString *footerTitle;
 
 @property (nonatomic,strong) NSString *detailContent;
@@ -47,6 +56,8 @@ typedef NS_OPTIONS(NSUInteger, ZFItemTypeOption) {
 @property (nonatomic,strong) UIColor *itemBackgroundColor;
 
 @property (nonatomic,assign) BOOL showDetail;
+
+@property (nonatomic,assign) BOOL animated;
 
 
 @end
@@ -72,7 +83,7 @@ typedef NS_OPTIONS(NSUInteger, ZFItemTypeOption) {
 
 -(instancetype)initWithFrame:(CGRect)frame withStyle:(ZFSliderStyle)style customViews:(NSArray *)Views animationItems:(NSArray *)item;
 
--(void)updateAnimationView:(CGFloat)percent;
+-(void)updateAnimationView:(CGFloat)percent scrollPosition:(ZFScrollPosition)position;
 
 @end
 

@@ -15,6 +15,8 @@
 
 @property (nonatomic,strong) NSMutableArray *subViewsArray;
 
+@property (nonatomic,assign) NSInteger lastPosition;
+
 @end
 
 @implementation StatsViewController
@@ -243,6 +245,21 @@
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
 
+    
+    ZFScrollPosition position = ZFScrollPositionUp;
+    
+    int currentPostion = scrollView.contentOffset.y;
+    if (currentPostion > _lastPosition) {
+        _lastPosition = currentPostion;
+        position = ZFScrollPositionUp;
+    }
+    else if (_lastPosition > currentPostion )
+    {
+        _lastPosition = currentPostion;
+
+        position = ZFScrollPositionDown;
+    }
+    
     for (UIView *subView in _subViewsArray) {
         
         BOOL bContainedTopView = CGRectContainsPoint(subView.frame,scrollView.contentOffset);
@@ -272,12 +289,11 @@
 
         if (bContainedTopView) {
             
+
             CGFloat percent = (scrollView.contentOffset.y - subView.frame.origin.y - middleView.frame.origin.y) /middleView.frame.size.height;
 
-            if (percent <0) {
-                percent = 0;
-            }
-            [sliderView updateAnimationView:percent];
+            [sliderView updateAnimationView:percent scrollPosition:position];
+            continue;
 
 
         }
@@ -285,14 +301,13 @@
 
             CGFloat percent = (point.y - subView.frame.origin.y - middleView.frame.origin.y) /middleView.frame.size.height;
 
-            if (percent >1) {
-                percent =1;
-            }
-            [sliderView updateAnimationView:1- percent];
-//             NSLog(@"percent:%f,tag:%d",percent,sliderView.viewTag);
+            [sliderView updateAnimationView:1- percent scrollPosition:position];
+            continue;
+
         }
         else{
-            [sliderView updateAnimationView:0.0];
+            [sliderView updateAnimationView:0.0 scrollPosition:position];
+            
         }
        
     }

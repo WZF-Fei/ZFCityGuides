@@ -108,7 +108,9 @@
     
     for (int i = 0; i < 9; i++) {
         UIButton *rainDrop = [UIButton new];
-        [rainDrop setImage:[UIImage imageNamed:@"statistics-raindrop-blue@2x"] forState:UIControlStateNormal];
+        rainDrop.userInteractionEnabled = NO;
+        UIImage * image = [UIImage imageNamed:@"statistics-raindrop-blue@2x"];
+        [rainDrop setImage:image forState:UIControlStateNormal];
         rainDrop.tag = i;
         rainDrop.enabled = NO;
         rainDrop.frame = CGRectMake(25 * i + CGRectGetMaxX(_firstAvgRainDropLabel.frame), 0, 35 , 35);
@@ -120,6 +122,7 @@
     //9个降雨量图标 yellow
     for (int i = 0; i < 9; i++) {
         UIButton *rainDrop = [UIButton new];
+        rainDrop.userInteractionEnabled = NO;
         [rainDrop setImage:[UIImage imageNamed:@"statistics-raindrop-yellow@2x"] forState:UIControlStateNormal];
         rainDrop.tag = i;
         rainDrop.enabled = NO;
