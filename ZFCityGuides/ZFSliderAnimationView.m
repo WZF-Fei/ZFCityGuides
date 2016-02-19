@@ -7,6 +7,8 @@
 //
 
 #import "ZFSliderAnimationView.h"
+#import "ZFGradientView.h"
+#import "ZFRainDropView.h"
 
 
 static const CGFloat gapWidth = 10.0f;
@@ -23,7 +25,7 @@ static const CGFloat gapWidth = 10.0f;
 
 -(void)setContent:(NSString *)content{
     _content = content;
-    _tempContent = content;
+    _showAnimated = YES;
 }
 @end
 
@@ -163,12 +165,20 @@ static const CGFloat gapWidth = 10.0f;
         }
     }
 
-    UILabel *footerLabel = [UILabel new];
-    footerLabel.textAlignment = NSTextAlignmentCenter;
+//    UILabel *footerLabel = [UILabel new];
+//    footerLabel.textAlignment = NSTextAlignmentCenter;
+//    footerLabel.frame = CGRectMake(0, footerOrignY, contenView.frame.size.width, 30);
+//    footerLabel.font = [UIFont fontWithName:BodyFontName size:11.0];
+//    footerLabel.textColor = kTextlightGrayColor;
+//    footerLabel.text = item.footerTitle;
+//    [contenView addSubview:footerLabel];
+    
+    //为什么要用button 而不是label ,方法取subview时，区分开contenlabel
+    UIButton *footerLabel = [UIButton new];
     footerLabel.frame = CGRectMake(0, footerOrignY, contenView.frame.size.width, 30);
-    footerLabel.font = [UIFont fontWithName:BodyFontName size:11.0];
-    footerLabel.textColor = kTextlightGrayColor;
-    footerLabel.text = item.footerTitle;
+    [footerLabel setTitle:item.footerTitle forState:UIControlStateNormal];
+    [footerLabel setTitleColor:kTextlightGrayColor forState:UIControlStateNormal];
+    footerLabel.titleLabel.font = [UIFont fontWithName:BodyFontName size:11.0f];
     [contenView addSubview:footerLabel];
     
     if (item.showDetail) {
@@ -184,7 +194,7 @@ static const CGFloat gapWidth = 10.0f;
         [contenView addSubview:detailBtn];
     }
 
-    
+    [self.subItemViews addObject:contenView];
     
 }
 
@@ -282,11 +292,11 @@ static const CGFloat gapWidth = 10.0f;
     
 }
 
--(void)updateAnimationView:(CGFloat)percent scrollPosition:(ZFScrollPosition)position{
+-(void)updateAnimationView:(CGFloat)percent scrollPosition:(ZFScrollPosition)position animated:(BOOL)animated{
 
     if (self.animation == ZFSliderItemAnimationLeft) {
 
-        [self showItemAnimationAtPosition:position percent:percent];
+        [self showItemAnimationAtPosition:position percent:percent animated:animated];
         
         if (percent < 0) {
             percent = 0;
@@ -303,7 +313,7 @@ static const CGFloat gapWidth = 10.0f;
     }
     else if (self.animation == ZFSliderItemAnimationRight){
         
-        [self showItemAnimationAtPosition:position percent:percent];
+        [self showItemAnimationAtPosition:position percent:percent animated:animated];
         
         if (percent < 0) {
             percent = 0;
@@ -321,7 +331,7 @@ static const CGFloat gapWidth = 10.0f;
     else if (self.animation == ZFSliderItemAnimationBoth){
 
 
-        [self showItemAnimationAtPosition:position percent:percent];
+        [self showItemAnimationAtPosition:position percent:percent animated:animated];
         NSAssert(self.items.count > 1, @"Count can't less than two");
         
         //此处只演示2个items
@@ -347,13 +357,38 @@ static const CGFloat gapWidth = 10.0f;
 }
 
 
--(void)showItemAnimationAtPosition:(ZFScrollPosition)position percent:(CGFloat)percent{
+-(void)showItemAnimationAtPosition:(ZFScrollPosition)position percent:(CGFloat)percent animated:(BOOL)animated{
     
     if (percent > 0 && percent < 1 && position == ZFScrollPositionUp) {
         
         for (int i = 0; i < self.subItemViews.count; i++) {
             
             NSArray *subViews = ((UIView *)self.subItemViews[i]).subviews;
+
+            
+            //RainDropView 实现动画
+            if ([[subViews[1] class] isSubclassOfClass:[ZFRainDropView class]]) {
+                
+                ZFRainDropView *rainDropView = subViews[1];
+                
+                if (!rainDropView.digitAnimated) {
+                    return;
+                }
+                [rainDropView increaseNumber:NO animated:animated];
+                rainDropView.digitAnimated = NO;
+                return;
+            }
+            else if([[subViews[1] class] isSubclassOfClass:[ZFGradientView class]]){
+                
+                ZFGradientView *gradientView = subViews[1];
+                
+                if (!gradientView.digitAnimated) {
+                    return;
+                }
+                [gradientView increaseNumber:NO animated:animated];
+                gradientView.digitAnimated = NO;
+                return;
+            }
             
             for (UIView *subView in subViews) {
                 
@@ -361,23 +396,24 @@ static const CGFloat gapWidth = 10.0f;
                     
                     //无法用key 区分，根据子视图上的UILabel实现
                     ZFSliderAnimationItem *item = self.items[i];
-                    if (item.animated) {
-                        continue;
-                    }
 
-                    if ([item.content rangeOfString:@"."].length >1) {
+                    if (!item.showAnimated) {
+                        return;
+                    }
+                    if ([item.content rangeOfString:@"."].length > 0) {
                         [self animatedForLabel:(UILabel *)subView forKey:self.animationKey fromValue:[item.content floatValue]  toValue:0 decimal:YES];
                     }
                     else{
                         [self animatedForLabel:(UILabel *)subView forKey:self.animationKey fromValue:[item.content floatValue]  toValue:0 decimal:NO];
                     }
                     
-                    item.tempContent = @"0";
-                    item.animated = YES;
+                    item.showAnimated = NO;
                     
                 }
+
             }
         }
+        
         
     }
     else if(percent < 0){
@@ -388,6 +424,27 @@ static const CGFloat gapWidth = 10.0f;
             
             NSArray *subViews = ((UIView *)self.subItemViews[i]).subviews;
             
+            if ([[subViews[1] class] isSubclassOfClass:[ZFRainDropView class]]) {
+                ZFRainDropView *rainDropView = subViews[1];
+                
+                if (!rainDropView.digitAnimated) {
+                    
+                    [rainDropView increaseNumber:YES animated:animated];
+                    rainDropView.digitAnimated = YES;
+                }
+                
+                return;
+            }
+            else if([[subViews[1] class] isSubclassOfClass:[ZFGradientView class]]){
+                
+                ZFGradientView *gradientView = subViews[1];
+                
+                if (!gradientView.digitAnimated) {
+                    [gradientView increaseNumber:YES animated:animated];
+                    gradientView.digitAnimated = YES;
+                }
+                return;
+            }
             for (UIView *subView in subViews) {
                 
                 if ([subView isKindOfClass:[UILabel class]]) {
@@ -396,25 +453,18 @@ static const CGFloat gapWidth = 10.0f;
                     //无法用key 区分，根据子视图上的UILabel实现
                     ZFSliderAnimationItem *item = self.items[i];
 
+                    if (!item.showAnimated)
+                    {
 
-                    if (position == ZFScrollPositionUp || (position == ZFScrollPositionDown && [item.tempContent isEqualToString:@"0"])) {
-                        item.animated = NO;
-                    }
-
-                    if (item.animated) {
-
-                        continue;
-                    }
-
-                    if (percent != 0.0 && [item.tempContent isEqualToString:@"0"]) {
-                        if ([item.content rangeOfString:@"."].length >1) {
+                        if ([item.content rangeOfString:@"."].length > 0) {
+                            
                             [self animatedForLabel:contentLabel forKey:self.animationKey fromValue:0 toValue:[item.content floatValue] decimal:YES];
                         }
                         else{
                             [self animatedForLabel:contentLabel forKey:self.animationKey fromValue:0 toValue:[item.content floatValue] decimal:NO];
                         }
-                        item.animated = YES;
-                        item.tempContent = item.content;
+
+                        item.showAnimated = YES;
 
                     }
                     
@@ -426,9 +476,25 @@ static const CGFloat gapWidth = 10.0f;
     }
     else if(percent == 0){
         
+        if (!animated) {
+            return;
+        }
         for (int i = 0; i < self.subItemViews.count; i++) {
             
             NSArray *subViews = ((UIView *)self.subItemViews[i]).subviews;
+            if ([[subViews[1] class] isSubclassOfClass:[ZFRainDropView class]]) {
+                ZFRainDropView *rainDropView = subViews[1];
+                
+                [rainDropView increaseNumber:NO animated:animated];
+                return;
+            }
+            else if([[subViews[1] class] isSubclassOfClass:[ZFGradientView class]]){
+                
+                ZFGradientView *gradientView = subViews[1];
+                
+                [gradientView increaseNumber:NO animated:animated];
+                return;
+            }
             
             for (UIView *subView in subViews) {
                 
@@ -437,7 +503,7 @@ static const CGFloat gapWidth = 10.0f;
                     //无法用key 区分，根据子视图上的UILabel实现
                     ZFSliderAnimationItem *item = self.items[i];
 
-                    if ([item.content rangeOfString:@"."].length >1) {
+                    if ([item.content rangeOfString:@"."].length > 0) {
                         [self animatedForLabel:(UILabel *)subView forKey:self.animationKey fromValue:0  toValue:[item.content floatValue] decimal:YES];
                     }
                     else{
@@ -524,7 +590,7 @@ static const CGFloat gapWidth = 10.0f;
     anBasic.fromValue = @(fromValue);   //从0开始
     anBasic.toValue = @(toValue);  //
     anBasic.duration = 1;    //持续时间
-    anBasic.beginTime = CACurrentMediaTime() + 1.0f;    //延迟1秒开始
+    anBasic.beginTime = CACurrentMediaTime() + 0.1 ;    //延迟0.1秒开始
     [label pop_addAnimation:anBasic forKey:key];
 }
 

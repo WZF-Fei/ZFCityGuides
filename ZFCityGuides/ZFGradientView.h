@@ -14,4 +14,7 @@
 
 @property (nonatomic, assign) CGFloat highTemperature;
 
+@property (nonatomic,assign) BOOL digitAnimated;
+
+-(void)increaseNumber:(BOOL)bIncreased animated:(BOOL)animated;
 @end

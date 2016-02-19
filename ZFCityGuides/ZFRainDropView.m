@@ -43,6 +43,7 @@
     if (self) {
         
         [self initSubViews];
+        self.digitAnimated = YES;
     }
     
     return self;
@@ -59,14 +60,14 @@
     _firstAvgRainDropLabel.frame = CGRectMake(0, 0, 90, 30);
     [self addSubview:_firstAvgRainDropLabel];
     
-    NSString *item = @"2.1";
-    CGFloat toValue = 2.1;
-    if ([item rangeOfString:@"."].length >0) {
-        [self animatedForLabel:_firstAvgRainDropLabel forKey:@"first" fromValue:0 toValue:toValue decimal:YES];
-    }
-    else{
-        [self animatedForLabel:_firstAvgRainDropLabel forKey:@"first" fromValue:0 toValue:toValue decimal:NO];
-    }
+//    NSString *item = @"2.1";
+//    CGFloat toValue = 2.1;
+//    if ([item rangeOfString:@"."].length >0) {
+//        [self animatedForLabel:_firstAvgRainDropLabel forKey:@"first" fromValue:0 toValue:toValue decimal:YES];
+//    }
+//    else{
+//        [self animatedForLabel:_firstAvgRainDropLabel forKey:@"first" fromValue:0 toValue:toValue decimal:NO];
+//    }
     
     UILabel *firstMonthLabel = [UILabel new];
     firstMonthLabel.text = @"1月";
@@ -84,14 +85,12 @@
     _secondAvgRainDropLabel.frame = CGRectMake(0, CGRectGetMaxY(_firstAvgRainDropLabel.frame) + 30, 90, 30);
     [self addSubview:_secondAvgRainDropLabel];
     
-    toValue = 4.1;
-    item = @"4.1";
-    if ([item rangeOfString:@"."].length >0) {
-        [self animatedForLabel:_secondAvgRainDropLabel forKey:@"second" fromValue:0 toValue:toValue decimal:YES];
-    }
-    else{
-        [self animatedForLabel:_secondAvgRainDropLabel forKey:@"second" fromValue:0 toValue:toValue decimal:NO];
-    }
+//    if ([item rangeOfString:@"."].length >0) {
+//        [self animatedForLabel:_secondAvgRainDropLabel forKey:@"second" fromValue:0 toValue:toValue decimal:YES];
+//    }
+//    else{
+//        [self animatedForLabel:_secondAvgRainDropLabel forKey:@"second" fromValue:0 toValue:toValue decimal:NO];
+//    }
     
     
     UILabel *secondMonthLabel = [UILabel new];
@@ -132,7 +131,7 @@
     }
     
 }
-
+#pragma mark -setter and getter
 -(NSMutableArray *)firstRainDropIcons{
     
     if (!_firstRainDropIcons) {
@@ -151,7 +150,24 @@
     return _secondRainDropIcons;
 }
 
+-(void)setPastMonthRainDrop:(NSString *)pastMonthRainDrop{
+    
+    _pastMonthRainDrop = pastMonthRainDrop;
+    [self animatedForLabel:_firstAvgRainDropLabel forKey:@"first" fromValue:0 toValue:[_pastMonthRainDrop floatValue] decimal:NO];
+    [self increaseNumber:YES animated:YES];
+}
 
+-(void)setNearstMonthRainDrop:(NSString *)nearstMonthRainDrop{
+    
+    _nearstMonthRainDrop = nearstMonthRainDrop;
+    
+    [self animatedForLabel:_secondAvgRainDropLabel forKey:@"second" fromValue:0 toValue:[_nearstMonthRainDrop floatValue] decimal:NO];
+    [self increaseNumber:YES animated:YES];
+
+    
+}
+
+#pragma mark - animationLabel method
 -(void)animatedForLabel:(UILabel *)label forKey:(NSString *)key fromValue:(CGFloat)fromValue toValue:(CGFloat) toValue decimal:(BOOL)decimal{
     
     POPAnimatableProperty *prop = [POPAnimatableProperty propertyWithName:key initializer:^(POPMutableAnimatableProperty *prop) {
@@ -175,17 +191,24 @@
                 int number = (int)roundf(values[0]);
                 for (int i = 0; i < number; i++) {
                     UIButton *button = [self.firstRainDropIcons objectAtIndex:i];
-                    button.enabled = YES;
+
+                    button.enabled = fromValue > toValue ? NO : YES;
                 }
             }
             else if ([key isEqualToString:@"second"]){
                 int number = (int)roundf(values[0]);
                 for (int i = 0; i < number; i++) {
                     UIButton *button = [self.secondRainDropIcons objectAtIndex:i];
-                    button.enabled = YES;
+                    button.enabled = fromValue > toValue ? NO : YES;
                 }
             }
 
+            if (fromValue > toValue) {
+                label.alpha = 0.5;
+            }
+            else{
+                label.alpha = 1.0;
+            }
             
             label.text = string;
         };
@@ -198,9 +221,53 @@
     anBasic.fromValue = @(fromValue);   //从0开始
     anBasic.toValue = @(toValue);  //
     anBasic.duration = 1;    //持续时间
-    anBasic.beginTime = CACurrentMediaTime() + 1.0f;    //延迟1秒开始
+    anBasic.beginTime = CACurrentMediaTime() ;    //延迟1秒开始
     [label pop_addAnimation:anBasic forKey:key];
 }
 
+
+-(void)increaseNumber:(BOOL)bIncreased animated:(BOOL)animated{
+    
+    if (!animated) {
+        return;
+    }
+
+    
+    if (!bIncreased) {
+        
+
+        if ([_pastMonthRainDrop rangeOfString:@"."].length >0) {
+            [self animatedForLabel:_firstAvgRainDropLabel forKey:@"first" fromValue:[_pastMonthRainDrop floatValue] toValue:0 decimal:YES];
+        }
+        else{
+            [self animatedForLabel:_firstAvgRainDropLabel forKey:@"first" fromValue:[_pastMonthRainDrop floatValue] toValue:0 decimal:NO];
+        }
+        
+        if ([_nearstMonthRainDrop rangeOfString:@"."].length >0) {
+            [self animatedForLabel:_secondAvgRainDropLabel forKey:@"second" fromValue:[_nearstMonthRainDrop floatValue] toValue:0 decimal:YES];
+        }
+        else{
+            [self animatedForLabel:_secondAvgRainDropLabel forKey:@"second" fromValue:[_nearstMonthRainDrop floatValue] toValue:0 decimal:NO];
+        }
+        
+    }
+    else{
+        
+        if ([_pastMonthRainDrop rangeOfString:@"."].length >0) {
+            [self animatedForLabel:_firstAvgRainDropLabel forKey:@"first" fromValue:0 toValue:[_pastMonthRainDrop floatValue]  decimal:YES];
+        }
+        else{
+            [self animatedForLabel:_firstAvgRainDropLabel forKey:@"first" fromValue:0 toValue:[_pastMonthRainDrop floatValue]  decimal:NO];
+        }
+        
+        if ([_nearstMonthRainDrop rangeOfString:@"."].length >0) {
+            [self animatedForLabel:_secondAvgRainDropLabel forKey:@"second" fromValue:0 toValue:[_nearstMonthRainDrop floatValue] decimal:YES];
+        }
+        else{
+            [self animatedForLabel:_secondAvgRainDropLabel forKey:@"second" fromValue:0 toValue:[_nearstMonthRainDrop floatValue] decimal:NO];
+        }
+    }
+    
+}
 
 @end

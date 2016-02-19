@@ -10,6 +10,14 @@
 
 @interface ZFRainDropView : UIView
 
+@property (nonatomic,strong) NSString *pastMonthRainDrop;
+
+@property (nonatomic,strong) NSString *nearstMonthRainDrop;
+
+@property (nonatomic,assign) BOOL digitAnimated;
+
 -(instancetype)initWithFrame:(CGRect)frame;
+
+-(void)increaseNumber:(BOOL)bIncreased animated:(BOOL)animated;
 
 @end

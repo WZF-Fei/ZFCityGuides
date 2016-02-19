@@ -47,8 +47,6 @@ typedef NS_OPTIONS(NSUInteger, ZFItemTypeOption) {
 
 @property (nonatomic,strong) NSString *content;
 
-@property (nonatomic,strong) NSString *tempContent; //用于临时存放变量
-
 @property (nonatomic,strong) NSString *footerTitle;
 
 @property (nonatomic,strong) NSString *detailContent;
@@ -57,7 +55,7 @@ typedef NS_OPTIONS(NSUInteger, ZFItemTypeOption) {
 
 @property (nonatomic,assign) BOOL showDetail;
 
-@property (nonatomic,assign) BOOL animated;
+@property (nonatomic,assign) BOOL showAnimated;
 
 
 @end
@@ -83,7 +81,8 @@ typedef NS_OPTIONS(NSUInteger, ZFItemTypeOption) {
 
 -(instancetype)initWithFrame:(CGRect)frame withStyle:(ZFSliderStyle)style customViews:(NSArray *)Views animationItems:(NSArray *)item;
 
--(void)updateAnimationView:(CGFloat)percent scrollPosition:(ZFScrollPosition)position;
+//animated：contentLabel 是否是动画
+-(void)updateAnimationView:(CGFloat)percent scrollPosition:(ZFScrollPosition)position animated:(BOOL)animated;
 
 @end
 

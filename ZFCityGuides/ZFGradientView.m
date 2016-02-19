@@ -35,6 +35,7 @@
     if (self) {
         
         [self initSubViews];
+        self.digitAnimated = YES;
     }
     
     return self;
@@ -94,6 +95,8 @@
     [_gradientLayer setStartPoint:CGPointMake(0, 0)];
     [_gradientLayer setEndPoint:CGPointMake(1, 0)];
     [self.layer addSublayer:_gradientLayer];
+    
+//    [self updateGradientWithLowData:0 highData:0];
     
     
 }
@@ -163,15 +166,16 @@
     return color;
 }
 
--(void)updateGradient{
+-(void)updateGradientWithLowData:(CGFloat)lowData highData:(CGFloat)highData{
     
-    UIColor *lowTemperatureTextColor = [self GetColorMinNumber:_lowTemperature];
-    UIColor *highTemperatureTextColor = [self GetColorMaxNumber:_highTemperature];
+    UIColor *lowTemperatureTextColor = [self GetColorMinNumber:lowData];
+    UIColor *highTemperatureTextColor = [self GetColorMaxNumber:highData];
     
     _lowTemperatureLabel.textColor = lowTemperatureTextColor;
     _highTemperatureLabel.textColor = highTemperatureTextColor;
     
     NSMutableArray *colors = [NSMutableArray array];
+    
     
     for (int i = _minIndex; i < _maxIndex +1; i++) {
         
@@ -195,6 +199,13 @@
         [locations addObject:@(1.0 /(colors.count -1) * j) ];
     }
     
+//    NSLog(@"colors:%@",colors);
+    
+    //colors 数组小于等于1时，无法生成渐变颜色
+    if (colors.count <= 1) {
+        [colors insertObject:(id)[self.colorsArray[0] CGColor] atIndex:0];
+    }
+
     [_gradientLayer setLocations:locations];
     [_gradientLayer setColors:colors];
 }
@@ -217,6 +228,23 @@
      
             
             label.text = string;
+            
+            if ([key isEqualToString:@"low"]) {
+                
+                [self updateGradientWithLowData:values[0] highData:_highTemperature];
+
+                
+            }
+            else if ([key isEqualToString:@"high"]){
+                
+
+                [self updateGradientWithLowData:_lowTemperature highData:values[0]];
+
+                if (!values[0]) {
+                    _lowTemperatureLabel.textColor = self.colorsArray[0];
+                }
+            }
+            
         };
         
         //            prop.threshold = 0.1;
@@ -226,8 +254,8 @@
     anBasic.property = prop;    //自定义属性
     anBasic.fromValue = @(fromValue);   //从0开始
     anBasic.toValue = @(toValue);  //
-    anBasic.duration = 1;    //持续时间
-    anBasic.beginTime = CACurrentMediaTime() + 1.0f;    //延迟1秒开始
+    anBasic.duration = 1.0;    //持续时间
+    anBasic.beginTime = CACurrentMediaTime() + 0.5;    //延迟0.5秒开始
     [label pop_addAnimation:anBasic forKey:key];
 }
 #pragma mark - getter
@@ -264,16 +292,35 @@
     
     _lowTemperature = lowTemperature;
     [self animatedForLabel:_lowTemperatureLabel forKey:@"low" fromValue:0 toValue:lowTemperature];
-    [self updateGradient];
+
 }
 
 -(void)setHighTemperature:(CGFloat)highTemperature{
     
     _highTemperature = highTemperature;
-    [self animatedForLabel:_highTemperatureLabel forKey:@"low" fromValue:0 toValue:highTemperature];
+    [self animatedForLabel:_highTemperatureLabel forKey:@"high" fromValue:0 toValue:highTemperature];
 
-    [self updateGradient];
 }
 
+
+-(void)increaseNumber:(BOOL)bIncreased animated:(BOOL)animated{
+    
+    if (!animated) {
+        return;
+    }
+    
+    if (!bIncreased) {
+    
+        [self animatedForLabel:_lowTemperatureLabel forKey:@"low" fromValue:_lowTemperature toValue:0];
+        [self animatedForLabel:_highTemperatureLabel forKey:@"high" fromValue:_highTemperature toValue:0];
+//        [self updateGradientWithLowData:0 highData:0];
+//        _lowTemperatureLabel.textColor = self.colorsArray[0];
+    }
+    else{
+        [self animatedForLabel:_lowTemperatureLabel forKey:@"low" fromValue:0 toValue:_lowTemperature];
+        [self animatedForLabel:_highTemperatureLabel forKey:@"high" fromValue:0 toValue:_highTemperature];
+//        [self updateGradientWithLowData:_lowTemperature highData:_highTemperature];
+    }
+}
 
 @end

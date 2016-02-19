@@ -107,6 +107,8 @@
 
     
     ZFRainDropView *rainDropView = [[ZFRainDropView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 100)];
+    rainDropView.pastMonthRainDrop = @"2.1";
+    rainDropView.nearstMonthRainDrop = @"4.1";
     
     ZFSliderAnimationView *animationView3 = [self createAnimationView:170.0
                                                                 style:ZFSliderStyleView
@@ -176,9 +178,8 @@
     item10.headerTitle = @"CITY POP.AS A % OF TOTAL COUNTRY";
     
     ZFRainDropView *rainDropView2 = [[ZFRainDropView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 100)];
-//    UIView *CustomView2 = [UIView new];
-//    CustomView2.backgroundColor = [UIColor orangeColor];
-//    CustomView2.frame = CGRectMake(0, 0, self.view.frame.size.width, 200);
+    rainDropView2.pastMonthRainDrop = @"1.8";
+    rainDropView2.nearstMonthRainDrop = @"3.1";
     ZFSliderAnimationView *animationView7 = [self createAnimationView:150.0
                                                                 style:ZFSliderStyleView
                                                           customViews:@[rainDropView2]
@@ -292,7 +293,7 @@
 
             CGFloat percent = (scrollView.contentOffset.y - subView.frame.origin.y - middleView.frame.origin.y) /middleView.frame.size.height;
 
-            [sliderView updateAnimationView:percent scrollPosition:position];
+            [sliderView updateAnimationView:percent scrollPosition:position animated:YES];
             continue;
 
 
@@ -301,12 +302,14 @@
 
             CGFloat percent = (point.y - subView.frame.origin.y - middleView.frame.origin.y) /middleView.frame.size.height;
 
-            [sliderView updateAnimationView:1- percent scrollPosition:position];
+            [sliderView updateAnimationView:1- percent scrollPosition:position animated:YES];
             continue;
 
         }
         else{
-            [sliderView updateAnimationView:0.0 scrollPosition:position];
+            
+            //
+            [sliderView updateAnimationView:0.0 scrollPosition:position animated:NO];
             
         }
        
