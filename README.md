@@ -28,3 +28,9 @@
 <img src="http://upload-images.jianshu.io/upload_images/1255171-e55dedda1d88e9c8.gif" width="266" height="500"/>
 </p>
 
+动画效果4：
+
+<p align="center" >
+<img src="https://github.com/WZF-Fei/ZFCityGuides/blob/master/ZFCityGuides/images/ZFCityGuides-stats.gif" width="266" height="500"/>
+</p>
+
