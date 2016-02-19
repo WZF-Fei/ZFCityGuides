@@ -102,6 +102,7 @@
 }
 
 #pragma mark - private method
+#pragma mark -获取最小值的颜色值
 -(UIColor *)GetColorMinNumber:(CGFloat)number{
     
 
@@ -124,7 +125,7 @@
     }
     return color;
 }
-
+#pragma mark -获取最大值的颜色值
 -(UIColor *)GetColorMaxNumber:(CGFloat)number{
     
     UIColor *color = nil;
@@ -166,6 +167,7 @@
     return color;
 }
 
+#pragma mark - 动态更新渐变颜色
 -(void)updateGradientWithLowData:(CGFloat)lowData highData:(CGFloat)highData{
     
     UIColor *lowTemperatureTextColor = [self GetColorMinNumber:lowData];
@@ -210,7 +212,7 @@
     [_gradientLayer setColors:colors];
 }
 
-
+#pragma mark - 动态更新label数字
 -(void)animatedForLabel:(UILabel *)label forKey:(NSString *)key fromValue:(CGFloat)fromValue toValue:(CGFloat) toValue{
     
     POPAnimatableProperty *prop = [POPAnimatableProperty propertyWithName:key initializer:^(POPMutableAnimatableProperty *prop) {
@@ -254,8 +256,8 @@
     anBasic.property = prop;    //自定义属性
     anBasic.fromValue = @(fromValue);   //从0开始
     anBasic.toValue = @(toValue);  //
-    anBasic.duration = 1.0;    //持续时间
-    anBasic.beginTime = CACurrentMediaTime() + 0.5;    //延迟0.5秒开始
+    anBasic.duration = 1.5;    //持续时间
+    anBasic.beginTime = CACurrentMediaTime() + 0.1;    //延迟0.1秒开始
     [label pop_addAnimation:anBasic forKey:key];
 }
 #pragma mark - getter
@@ -302,7 +304,7 @@
 
 }
 
-
+#pragma mark - view动画
 -(void)increaseNumber:(BOOL)bIncreased animated:(BOOL)animated{
     
     if (!animated) {
@@ -313,13 +315,12 @@
     
         [self animatedForLabel:_lowTemperatureLabel forKey:@"low" fromValue:_lowTemperature toValue:0];
         [self animatedForLabel:_highTemperatureLabel forKey:@"high" fromValue:_highTemperature toValue:0];
-//        [self updateGradientWithLowData:0 highData:0];
-//        _lowTemperatureLabel.textColor = self.colorsArray[0];
+
     }
     else{
         [self animatedForLabel:_lowTemperatureLabel forKey:@"low" fromValue:0 toValue:_lowTemperature];
         [self animatedForLabel:_highTemperatureLabel forKey:@"high" fromValue:0 toValue:_highTemperature];
-//        [self updateGradientWithLowData:_lowTemperature highData:_highTemperature];
+
     }
 }
 

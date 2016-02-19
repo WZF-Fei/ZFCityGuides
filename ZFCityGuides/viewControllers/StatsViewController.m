@@ -40,24 +40,36 @@
                             rightImage:nil];
 
     
+
     [self addSubViewOnScrollView];
     
 
 
 }
 
+
 -(void)addSubViewOnScrollView{
     
     static const CGFloat slideViewHeight = 140.0;
     _subViewsArray = [NSMutableArray array];
+    
+    CGRect offsetFrame = self.view.frame;
+    offsetFrame.origin.y = self.view.frame.size.height;
+    
     CGRect frame = self.view.frame;
     UIScrollView *scrollView = [UIScrollView new];
     frame.origin.y = CGRectGetMaxY(self.navigationBarView.frame) + 10;
-//    frame.size.height =self.view.frame.size.height - frame.origin.y;
-    scrollView.frame = frame;
     scrollView.delegate = self;
-    
     [self.view addSubview:scrollView];
+    
+    
+    scrollView.frame = offsetFrame;
+    [UIView animateWithDuration:1.5 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        
+        scrollView.frame = frame;
+    } completion:^(BOOL finished) {
+        
+    }];
     
     CGFloat height = frame.origin.y;
     
@@ -247,36 +259,18 @@
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
 
     
-    ZFScrollPosition position = ZFScrollPositionUp;
-    
-    int currentPostion = scrollView.contentOffset.y;
-    if (currentPostion > _lastPosition) {
-        _lastPosition = currentPostion;
-        position = ZFScrollPositionUp;
-    }
-    else if (_lastPosition > currentPostion )
-    {
-        _lastPosition = currentPostion;
-
-        position = ZFScrollPositionDown;
-    }
-    
     for (UIView *subView in _subViewsArray) {
         
         BOOL bContainedTopView = CGRectContainsPoint(subView.frame,scrollView.contentOffset);
         CGPoint point = scrollView.contentOffset;
         point.y += (self.view.frame.size.height - CGRectGetMaxY(self.navigationBarView.frame) -10);
         
-//        NSLog(@"point:%@",NSStringFromCGPoint(point));
-//        NSLog(@"subview.frame:%@",NSStringFromCGRect(subView.frame));
-//        NSLog(@"superview.subview.frame:%@",NSStringFromCGRect([subView convertRect:subView.frame toView:self.view]));
         
         BOOL bContainedBottomView = CGRectContainsPoint(subView.frame,point);
 
         
         ZFSliderAnimationView *sliderView = (ZFSliderAnimationView *)subView;
 
-        
         UIView *middleView = nil;
         
         //自定义的view
@@ -293,7 +287,7 @@
 
             CGFloat percent = (scrollView.contentOffset.y - subView.frame.origin.y - middleView.frame.origin.y) /middleView.frame.size.height;
 
-            [sliderView updateAnimationView:percent scrollPosition:position animated:YES];
+            [sliderView updateAnimationView:percent animated:YES];
             continue;
 
 
@@ -302,14 +296,14 @@
 
             CGFloat percent = (point.y - subView.frame.origin.y - middleView.frame.origin.y) /middleView.frame.size.height;
 
-            [sliderView updateAnimationView:1- percent scrollPosition:position animated:YES];
+            [sliderView updateAnimationView:1- percent animated:YES];
             continue;
 
         }
         else{
             
             //
-            [sliderView updateAnimationView:0.0 scrollPosition:position animated:NO];
+            [sliderView updateAnimationView:0.0 animated:NO];
             
         }
        

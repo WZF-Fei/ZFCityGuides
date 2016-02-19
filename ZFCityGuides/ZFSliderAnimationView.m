@@ -165,13 +165,6 @@ static const CGFloat gapWidth = 10.0f;
         }
     }
 
-//    UILabel *footerLabel = [UILabel new];
-//    footerLabel.textAlignment = NSTextAlignmentCenter;
-//    footerLabel.frame = CGRectMake(0, footerOrignY, contenView.frame.size.width, 30);
-//    footerLabel.font = [UIFont fontWithName:BodyFontName size:11.0];
-//    footerLabel.textColor = kTextlightGrayColor;
-//    footerLabel.text = item.footerTitle;
-//    [contenView addSubview:footerLabel];
     
     //为什么要用button 而不是label ,方法取subview时，区分开contenlabel
     UIButton *footerLabel = [UIButton new];
@@ -292,11 +285,11 @@ static const CGFloat gapWidth = 10.0f;
     
 }
 
--(void)updateAnimationView:(CGFloat)percent scrollPosition:(ZFScrollPosition)position animated:(BOOL)animated{
+-(void)updateAnimationView:(CGFloat)percent animated:(BOOL)animated{
 
     if (self.animation == ZFSliderItemAnimationLeft) {
 
-        [self showItemAnimationAtPosition:position percent:percent animated:animated];
+        [self showItemAnimation:percent animated:animated];
         
         if (percent < 0) {
             percent = 0;
@@ -314,7 +307,7 @@ static const CGFloat gapWidth = 10.0f;
     }
     else if (self.animation == ZFSliderItemAnimationRight){
         
-        [self showItemAnimationAtPosition:position percent:percent animated:animated];
+        [self showItemAnimation:percent animated:animated];
         
         if (percent < 0) {
             percent = 0;
@@ -326,14 +319,14 @@ static const CGFloat gapWidth = 10.0f;
         percent = percent * 0.5;
         UIView *contentView = self.subviews[0];
         CGRect frame = contentView.frame;
-        //向左移动
+        //向右移动
         frame.origin.x = (gapWidth + contentView.frame.size.width * percent);
         contentView.frame = frame;
     }
     else if (self.animation == ZFSliderItemAnimationBoth){
 
 
-        [self showItemAnimationAtPosition:position percent:percent animated:animated];
+        [self showItemAnimation:percent animated:animated];
         NSAssert(self.items.count > 1, @"Count can't less than two");
         
         //此处只演示2个items
@@ -360,9 +353,9 @@ static const CGFloat gapWidth = 10.0f;
 }
 
 
--(void)showItemAnimationAtPosition:(ZFScrollPosition)position percent:(CGFloat)percent animated:(BOOL)animated{
+-(void)showItemAnimation:(CGFloat)percent animated:(BOOL)animated{
     
-    if (percent > 0 && percent < 1 && position == ZFScrollPositionUp) {
+    if (percent > 0 && percent < 1) {
         
         for (int i = 0; i < self.subItemViews.count; i++) {
             
@@ -592,7 +585,7 @@ static const CGFloat gapWidth = 10.0f;
     anBasic.property = prop;    //自定义属性
     anBasic.fromValue = @(fromValue);   //从0开始
     anBasic.toValue = @(toValue);  //
-    anBasic.duration = 1;    //持续时间
+    anBasic.duration = 1.5;    //持续时间
     anBasic.beginTime = CACurrentMediaTime() + 0.1 ;    //延迟0.1秒开始
     [label pop_addAnimation:anBasic forKey:key];
 }

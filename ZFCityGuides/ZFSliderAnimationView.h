@@ -28,12 +28,7 @@ typedef NS_ENUM(NSInteger, ZFSliderItemAnimation) {
 
 };
 
-typedef NS_ENUM(NSInteger, ZFScrollPosition) {
-    
-    ZFScrollPositionUp,
-    ZFScrollPositionDown
-    
-};
+
 typedef NS_OPTIONS(NSUInteger, ZFItemTypeOption) {
     ZFItemTypeOptionNone        = 0,
     ZFItemTypeOptionNoHeader    = 1 << 0,
@@ -82,7 +77,7 @@ typedef NS_OPTIONS(NSUInteger, ZFItemTypeOption) {
 -(instancetype)initWithFrame:(CGRect)frame withStyle:(ZFSliderStyle)style customViews:(NSArray *)Views animationItems:(NSArray *)item;
 
 //animated：contentLabel 是否是动画
--(void)updateAnimationView:(CGFloat)percent scrollPosition:(ZFScrollPosition)position animated:(BOOL)animated;
+-(void)updateAnimationView:(CGFloat)percent animated:(BOOL)animated;
 
 @end
 

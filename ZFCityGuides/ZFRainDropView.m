@@ -27,9 +27,7 @@
     
     self = [super init];
     if (self) {
-        
-
-        
+         
     }
     
     return self;
@@ -60,15 +58,7 @@
     _firstAvgRainDropLabel.frame = CGRectMake(0, 0, 90, 30);
     [self addSubview:_firstAvgRainDropLabel];
     
-//    NSString *item = @"2.1";
-//    CGFloat toValue = 2.1;
-//    if ([item rangeOfString:@"."].length >0) {
-//        [self animatedForLabel:_firstAvgRainDropLabel forKey:@"first" fromValue:0 toValue:toValue decimal:YES];
-//    }
-//    else{
-//        [self animatedForLabel:_firstAvgRainDropLabel forKey:@"first" fromValue:0 toValue:toValue decimal:NO];
-//    }
-    
+
     UILabel *firstMonthLabel = [UILabel new];
     firstMonthLabel.text = @"1月";
     firstMonthLabel.textAlignment = NSTextAlignmentCenter;
@@ -85,13 +75,7 @@
     _secondAvgRainDropLabel.frame = CGRectMake(0, CGRectGetMaxY(_firstAvgRainDropLabel.frame) + 30, 90, 30);
     [self addSubview:_secondAvgRainDropLabel];
     
-//    if ([item rangeOfString:@"."].length >0) {
-//        [self animatedForLabel:_secondAvgRainDropLabel forKey:@"second" fromValue:0 toValue:toValue decimal:YES];
-//    }
-//    else{
-//        [self animatedForLabel:_secondAvgRainDropLabel forKey:@"second" fromValue:0 toValue:toValue decimal:NO];
-//    }
-    
+
     
     UILabel *secondMonthLabel = [UILabel new];
     secondMonthLabel.text = @"7月";
@@ -220,8 +204,8 @@
     anBasic.property = prop;    //自定义属性
     anBasic.fromValue = @(fromValue);   //从0开始
     anBasic.toValue = @(toValue);  //
-    anBasic.duration = 1;    //持续时间
-    anBasic.beginTime = CACurrentMediaTime() ;    //延迟1秒开始
+    anBasic.duration = 1.5;    //持续时间
+    anBasic.beginTime = CACurrentMediaTime() + 0.1;    //延迟0.1秒开始
     [label pop_addAnimation:anBasic forKey:key];
 }
 
