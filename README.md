@@ -31,6 +31,14 @@
 动画效果4：
 
 <p align="center" >
+<img src="http://upload-images.jianshu.io/upload_images/1255171-50b3cf8b9bcd718d.gif?imageMogr2/auto-orient/strip" width="266" height="500"/>
+动画效果5：
+<p align="center" >
+<img src="http://upload-images.jianshu.io/upload_images/1255171-e67dbcdc7df75373.gif?imageMogr2/auto-orient/strip" width="266" height="500"/>
+
+动画效果6：
+<p align="center" >
 <img src="https://github.com/WZF-Fei/ZFCityGuides/blob/master/ZFCityGuides/images/ZFCityGuides-stats.gif" width="266" height="500"/>
+
 </p>
 
