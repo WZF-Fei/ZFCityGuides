@@ -305,6 +305,7 @@ static const CGFloat gapWidth = 10.0f;
             percent =1;
         }
         
+        percent = percent * 0.5;
         UIView *contentView = self.subviews[0];
         CGRect frame = contentView.frame;
         //向左移动
@@ -322,6 +323,7 @@ static const CGFloat gapWidth = 10.0f;
             percent =1;
         }
         
+        percent = percent * 0.5;
         UIView *contentView = self.subviews[0];
         CGRect frame = contentView.frame;
         //向左移动
@@ -343,6 +345,7 @@ static const CGFloat gapWidth = 10.0f;
             percent =1;
         }
 
+        percent = percent * 0.5;
         CGRect leftFrame = self.subviews[0].frame;
         CGRect rightFrame = self.subviews[1].frame;
         //左侧item 向左移动
@@ -353,7 +356,7 @@ static const CGFloat gapWidth = 10.0f;
         self.subviews[1].frame = rightFrame;
     }
     //改变透明度
-    self.alpha = 1 - percent *1.5;
+    self.alpha = 1 - percent *2;
 }
 
 
