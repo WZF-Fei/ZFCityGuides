@@ -36,12 +36,12 @@
 动画效果5：
 
 <p align="center" >
-<img src="http://upload-images.jianshu.io/upload_images/1255171-e67dbcdc7df75373.gif" width="266" height="500"/>
+<img src="http://upload-images.jianshu.io/upload_images/1255171-b20e5c3b0ca66720.gif" width="266" height="500"/>
 </p>
 
 动画效果6：
 
 <p align="center" >
-<img src="https://github.com/WZF-Fei/ZFCityGuides/blob/master/ZFCityGuides/images/ZFCityGuides-stats.gif" width="266" height="500"/>
+<img src="http://upload-images.jianshu.io/upload_images/1255171-58e781b4e3e50192.gif" width="266" height="500"/>
 </p>
 
