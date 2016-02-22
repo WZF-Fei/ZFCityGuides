@@ -9,6 +9,9 @@
 详细参见简书：
 
 [干货系列之实现City Guides的动画效果(一)](http://www.jianshu.com/p/d8e7cc5b307b)
+[干货系列之实现City Guides的动画效果(二)](http://www.jianshu.com/p/4bebbb4bfc38)
+
+此demo仅供学习交流使用。
 
 部分动画效果：
 
