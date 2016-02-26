@@ -18,7 +18,7 @@
 
 动画效果1：
 <p align="center" >
-<img src="http://upload-images.jianshu.io/upload_images/1255171-07889b069ecc1427.gif" width="266" height="500"/>
+<img src="http://upload-images.jianshu.io/upload_images/1255171-50b3cf8b9bcd718d.gif" width="266" height="500"/>
 </p>
 
 动画效果2：
@@ -35,7 +35,7 @@
 动画效果4：
 
 <p align="center" >
-<img src="http://upload-images.jianshu.io/upload_images/1255171-50b3cf8b9bcd718d.gif" width="266" height="500"/>
+<img src="http://upload-images.jianshu.io/upload_images/1255171-07889b069ecc1427.gif" width="266" height="500"/>
 </p>
 动画效果5：
 
