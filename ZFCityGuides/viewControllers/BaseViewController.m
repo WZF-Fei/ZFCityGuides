@@ -8,14 +8,30 @@
 
 #import "BaseViewController.h"
 #import "NavigationAnimationViewController.h"
+#import "PresentAnimationController.h"
+#import "ZFMainTabBarController.h"
+#import "ZFInteractiveTransition.h"
+
 
 @interface BaseViewController ()
+
+
+@property (nonatomic,strong) UIView *topWindow;
+
+@property (strong,nonatomic) ZFInteractiveTransition *interactionViewController;
+
+@property (assign,nonatomic) CGRect topViewFrame;
 
 @end
 
 @implementation BaseViewController
 
+-(void)dealloc{
+    
+    NSLog(@"%@--dealloc",self);
+     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"showTopWindow" object:nil];
 
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -29,8 +45,78 @@
     _navigationBarView.backgroundColor = kContentViewBgColor;
     _navigationBarView.frame = CGRectMake(0, 20, self.view.frame.size.width, 44);
     [self.view addSubview:_navigationBarView];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showTopWindow:) name:@"showTopWindow" object:nil];
+    
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear:animated];
+    
+    if (!self.topWindow) {
+        _topWindow = [UIView new];
+        _topWindow.frame = CGRectMake([UIScreen mainScreen].bounds.size.width - 60, [UIScreen mainScreen].bounds.size.height -60, 50, 40);
+        
+        UIImageView *imageView = [UIImageView new];
+        imageView.backgroundColor = [UIColor blackColor];
+        imageView.image = [UIImage imageNamed:@"main-menu-toggle-arrow-iphone@2x"];
+        self.topViewFrame = CGRectMake(0, 0, 50, 40);
+        imageView.frame = self.topViewFrame;
+        imageView.contentMode = UIViewContentModeCenter;
+        [_topWindow addSubview:imageView];
+        
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapTopWindow:)];
+        
+        [_topWindow addGestureRecognizer:tap];
+        
+        [[UIApplication sharedApplication].keyWindow addSubview:_topWindow];
+
+    }
+   
+}
+
+-(void)showTopWindow:(NSNotification *)notification{
+    
+    [self.topWindow removeFromSuperview];
+    self.topWindow = nil;
+    
+    NSLog(@"执行一次");
+    
+    _topWindow = [UIView new];
+    _topWindow.frame = CGRectMake([UIScreen mainScreen].bounds.size.width - 60, [UIScreen mainScreen].bounds.size.height -60, 50, 40);
+    
+    UIImageView *imageView = [UIImageView new];
+    imageView.backgroundColor = [UIColor blackColor];
+    imageView.image = [UIImage imageNamed:@"main-menu-toggle-arrow-iphone@2x"];
+    self.topViewFrame = CGRectMake(0, 0, 50, 40);
+    imageView.frame = self.topViewFrame;
+    imageView.contentMode = UIViewContentModeCenter;
+    [_topWindow addSubview:imageView];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapTopWindow:)];
+    
+    [_topWindow addGestureRecognizer:tap];
+    
+    [[UIApplication sharedApplication].keyWindow addSubview:_topWindow];
+    
+
+}
+
+-(void)tapTopWindow:(UITapGestureRecognizer *)recognizer{
+    
+
+    ZFMainTabBarController *mainTabBarVC = [[ZFMainTabBarController alloc] init];
+    mainTabBarVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    mainTabBarVC.transitioningDelegate = self;
+
+    self.interactionViewController = [ZFInteractiveTransition new];
+    [self presentViewController:mainTabBarVC animated:YES completion:^{
+
+    }];
+
+ 
+}
 
 #pragma mark - setter and getter方法
 
@@ -93,6 +179,7 @@
     self.midItemImage = midImage;
     self.rightItemImage = rightImage;
     
+
     switch (navigationStyle) {
         case NavigationStyleLeft:
             
@@ -190,12 +277,52 @@
 #pragma mark -返回
 -(void)back:(UIButton *)sender
 {
+    [self.topWindow removeFromSuperview];
+    self.topWindow = nil;
+    
     [self.navigationController popViewControllerAnimated:YES];
+
 }
 
 -(void)more:(UIButton *)sender{
     
     NSLog(@"more");
+}
+
+
+-(void)pushNextViewController:(UIViewController *)viewController animated:(BOOL)animated{
+
+    [self.topWindow removeFromSuperview];
+    self.topWindow = nil;
+    
+    
+    [self.navigationController pushViewController:viewController animated:animated];
+    
+}
+#pragma mark -UIViewControllerTransitioningDelegate
+
+- (nullable id <UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source{
+    
+    
+    [_interactionViewController interactionForViewController:presented];
+    
+    PresentAnimationController *presentAnimation = [PresentAnimationController new];
+    presentAnimation.dismiss = NO;
+    return presentAnimation;
+}
+
+
+- (nullable id <UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed{
+    
+    PresentAnimationController *presentAnimation = [PresentAnimationController new];
+    presentAnimation.dismiss = YES;
+    return presentAnimation;
+}
+
+
+- (nullable id <UIViewControllerInteractiveTransitioning>)interactionControllerForDismissal:(id <UIViewControllerAnimatedTransitioning>)animator{
+    
+    return _interactionViewController.interactionInProgress ? _interactionViewController: nil;
 }
 
 @end

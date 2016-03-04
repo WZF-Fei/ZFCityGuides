@@ -38,4 +38,6 @@ typedef enum
                              midImage:(UIImage *)midImage
                            rightImage:(UIImage *)rightImage;
 
+
+-(void)pushNextViewController:(UIViewController *)viewController animated:(BOOL)animated;
 @end

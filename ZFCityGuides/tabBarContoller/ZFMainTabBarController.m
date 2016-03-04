@@ -384,7 +384,6 @@
         //remove presentingView
         [weakSelf.presentingViewController.view removeFromSuperview];
     }];
-
 }
 
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath

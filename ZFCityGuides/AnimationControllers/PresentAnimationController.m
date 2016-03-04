@@ -155,6 +155,8 @@
         [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
         //解决背景变黑
         [[[UIApplication sharedApplication] keyWindow] addSubview:containerView];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"showTopWindow" object:nil];
     }];
 
     

@@ -33,17 +33,14 @@
     self.view.backgroundColor = kContentViewBgColor;
     
     self.navigationTitle = @"Stats";
-    
+    //1.先初始化
+    [self addSubViewOnScrollView];
+    //2.创建navigationBar 样式
     [self createNavigationBarWithStyle:NavigationStyleLeftAndMid
                              leftImage:[UIImage imageNamed:@"back"]
                               midImage:[UIImage imageNamed:@"main-menu-iphone-essentials-selected@2x"]
                             rightImage:nil];
-
-    
-
-    [self addSubViewOnScrollView];
-    
-
+  
 
 }
 

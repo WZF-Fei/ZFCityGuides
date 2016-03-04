@@ -25,16 +25,19 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = kContentViewBgColor;
+   
+    //1.先初始化
+    [self initViews];
     
     self.navigationTitle = @"Essentials";
-    
+    //2.创建navigationBar 样式
     [self createNavigationBarWithStyle:NavigationStyleLeftAndMid
                              leftImage:nil
                               midImage:[UIImage imageNamed:@"main-menu-iphone-essentials-selected@2x"]
                             rightImage:nil];
     
-    [self initViews];
-    
+
+
 }
 
 -(void)initViews{
@@ -156,7 +159,9 @@
 //    MainNavigationController *navigation = (MainNavigationController *)self.navigationController;
 //    navigation.interactionViewController = [ZFNavInteractiveTransition new];
     
-    [self.navigationController pushViewController:statsVC animated:YES];
+//    [self.navigationController pushViewController:statsVC animated:YES];
+    
+    [self pushNextViewController:statsVC animated:YES];
     
     
 }
