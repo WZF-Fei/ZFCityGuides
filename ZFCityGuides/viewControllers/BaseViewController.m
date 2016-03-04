@@ -57,6 +57,8 @@
     if (!self.topWindow) {
         _topWindow = [UIView new];
         _topWindow.frame = CGRectMake([UIScreen mainScreen].bounds.size.width - 60, [UIScreen mainScreen].bounds.size.height -60, 50, 40);
+        _topWindow.layer.cornerRadius = 5;
+        _topWindow.layer.masksToBounds = YES;
         
         UIImageView *imageView = [UIImageView new];
         imageView.backgroundColor = [UIColor blackColor];
@@ -85,6 +87,8 @@
     
     _topWindow = [UIView new];
     _topWindow.frame = CGRectMake([UIScreen mainScreen].bounds.size.width - 60, [UIScreen mainScreen].bounds.size.height -60, 50, 40);
+    _topWindow.layer.cornerRadius = 5;
+    _topWindow.layer.masksToBounds = YES;
     
     UIImageView *imageView = [UIImageView new];
     imageView.backgroundColor = [UIColor blackColor];
