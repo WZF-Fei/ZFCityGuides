@@ -30,16 +30,14 @@
     UIView *toView = _toVC.view;
     UIView *fromView = fromVC.view;
     
-
+    [_toVC beginAppearanceTransition:YES animated:YES];
     if(self.isDismissed){
         [self RunDismissAnimation:transitionContext fromVC:fromVC toVC:_toVC fromView:fromView toView:toView];
     } else {
         [self RunPresentAnimation:transitionContext fromVC:fromVC toVC:_toVC fromView:fromView toView:toView];
     }
-//    // 调用viewWillDisappear
-//    [_toVC beginAppearanceTransition:NO animated:YES];
-    //调用toVC的viewWillAppear
-//    [_toVC beginAppearanceTransition:YES animated:YES];
+
+    [fromVC beginAppearanceTransition:YES animated:YES];
     
 }
 

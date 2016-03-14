@@ -23,13 +23,15 @@
     UIView *toView = toVC.view;
     UIView *fromView = fromVC.view;
     
+    [toVC beginAppearanceTransition:YES animated:YES];
+    
     if(self.isPushed){
         [self pushViewControllerAnimation:transitionContext fromVC:fromVC toVC:toVC fromView:fromView toView:toView];
     } else {
         [self popViewControllerAnimation:transitionContext fromVC:fromVC toVC:toVC fromView:fromView toView:toView];
     }
     
-
+    [fromVC beginAppearanceTransition:YES animated:YES];
     
 }
 

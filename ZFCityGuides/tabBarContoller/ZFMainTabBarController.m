@@ -39,7 +39,6 @@
 
 -(void)dealloc{
     
-    NSLog(@"%@ delloc",self);
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kChangedFrame object:nil];
 }
