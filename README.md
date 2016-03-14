@@ -1,8 +1,7 @@
 # ZFCityGuides
 使用方法：
 
-1. 在终端里pod install --verbose --no-repo-update  或 pod update --verbose --no-repo-update
-2. 打开.xcworkspace编译运行即可
+1. 打开.xcworkspace编译运行即可
  
 高仿City Guides 动画效果
 
