@@ -15,6 +15,8 @@
 
 #import "EssentialsViewController.h"
 
+#import "ZFSegmentedControl.h"
+
 
 @interface ZFMainTabBarController ()<UICollectionViewDataSource,UICollectionViewDelegate,UIGestureRecognizerDelegate,UIViewControllerTransitioningDelegate>
 
@@ -111,12 +113,12 @@
     
     NSArray *array = @[@"WEATHER",@"SEARCH",@"SETTING",@"ALL CITIES"];
     
-    UISegmentedControl *segmentControl = [[UISegmentedControl alloc] initWithItems:array];
+    ZFSegmentedControl *segmentControl = [[ZFSegmentedControl alloc] initWithItems:array];
     segmentControl.layer.borderWidth = 1;
     segmentControl.layer.borderColor = kSegmentBorderColor.CGColor;
     segmentControl.layer.cornerRadius = 5.0;
     segmentControl.layer.masksToBounds = YES;
-    segmentControl.tintColor = [UIColor blackColor];
+    segmentControl.tintColor = kTabItemBgSelected;
     segmentControl.frame = CGRectMake(20, CGRectGetMinY(cityTime.frame) - 50 - 30, contentView.frame.size.width - 20*2, 50);
     [contentView addSubview:segmentControl];
     
@@ -125,6 +127,7 @@
     [segmentControl setTitleTextAttributes:normalDic forState:UIControlStateNormal];
     [segmentControl setTitleTextAttributes:selectedDic forState:UIControlStateSelected];
     
+  
     
     //collectionview 布局
     UICollectionViewFlowLayout *flowLayout= [[UICollectionViewFlowLayout alloc] init];
