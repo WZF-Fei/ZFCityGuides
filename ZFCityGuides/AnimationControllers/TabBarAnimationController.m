@@ -27,6 +27,8 @@
     UIView* containerView = [transitionContext containerView];
     
     
+    [toVC beginAppearanceTransition:YES animated:YES];
+    
     CGRect frame = [transitionContext initialFrameForViewController:fromVC];
     
     CGRect offScreenFrame = frame;
@@ -60,6 +62,8 @@
         
         [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
     }];
+    
+    [fromVC beginAppearanceTransition:NO animated:YES];
 }
 
 @end

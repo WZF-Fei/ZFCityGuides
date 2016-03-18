@@ -37,7 +37,7 @@
         [self RunPresentAnimation:transitionContext fromVC:fromVC toVC:_toVC fromView:fromView toView:toView];
     }
 
-    [fromVC beginAppearanceTransition:YES animated:YES];
+    [fromVC beginAppearanceTransition:NO animated:YES];
     
 }
 

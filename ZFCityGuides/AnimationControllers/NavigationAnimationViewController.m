@@ -31,7 +31,7 @@
         [self popViewControllerAnimation:transitionContext fromVC:fromVC toVC:toVC fromView:fromView toView:toView];
     }
     
-    [fromVC beginAppearanceTransition:YES animated:YES];
+    [fromVC beginAppearanceTransition:NO animated:YES];
     
 }
 
