@@ -22,6 +22,17 @@
 		DB01730D1C7174A500411344 /* statistics-raindrop-yellow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DB0173071C7174A500411344 /* statistics-raindrop-yellow@2x.png */; };
 		DB01730E1C7174A500411344 /* statistics-woman.png in Resources */ = {isa = PBXBuildFile; fileRef = DB0173081C7174A500411344 /* statistics-woman.png */; };
 		DB01730F1C7174A500411344 /* statistics-woman@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DB0173091C7174A500411344 /* statistics-woman@2x.png */; };
+		DB1A91C61C9BDE33007C9C7C /* main-menu-iphone-search-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = DB1A91C21C9BDE33007C9C7C /* main-menu-iphone-search-selected.png */; };
+		DB1A91C71C9BDE33007C9C7C /* main-menu-iphone-search-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DB1A91C31C9BDE33007C9C7C /* main-menu-iphone-search-selected@2x.png */; };
+		DB1A91C81C9BDE33007C9C7C /* main-menu-iphone-search.png in Resources */ = {isa = PBXBuildFile; fileRef = DB1A91C41C9BDE33007C9C7C /* main-menu-iphone-search.png */; };
+		DB1A91C91C9BDE33007C9C7C /* main-menu-iphone-search@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DB1A91C51C9BDE33007C9C7C /* main-menu-iphone-search@2x.png */; };
+		DB1A91D01C9BDE41007C9C7C /* main-menu-iphone-settings.png in Resources */ = {isa = PBXBuildFile; fileRef = DB1A91CA1C9BDE41007C9C7C /* main-menu-iphone-settings.png */; };
+		DB1A91D11C9BDE41007C9C7C /* main-menu-iphone-settings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DB1A91CB1C9BDE41007C9C7C /* main-menu-iphone-settings@2x.png */; };
+		DB1A91D21C9BDE41007C9C7C /* main-menu-iphone-weather-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = DB1A91CC1C9BDE41007C9C7C /* main-menu-iphone-weather-selected.png */; };
+		DB1A91D31C9BDE41007C9C7C /* main-menu-iphone-weather-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DB1A91CD1C9BDE41007C9C7C /* main-menu-iphone-weather-selected@2x.png */; };
+		DB1A91D41C9BDE41007C9C7C /* main-menu-iphone-weather.png in Resources */ = {isa = PBXBuildFile; fileRef = DB1A91CE1C9BDE41007C9C7C /* main-menu-iphone-weather.png */; };
+		DB1A91D51C9BDE41007C9C7C /* main-menu-iphone-weather@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DB1A91CF1C9BDE41007C9C7C /* main-menu-iphone-weather@2x.png */; };
+		DB1A91D81C9BE0F1007C9C7C /* ZFSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = DB1A91D71C9BE0F1007C9C7C /* ZFSegmentedControl.m */; };
 		DB27BAB01C72A8000027D8BA /* ZFRainDropView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB27BAAF1C72A8000027D8BA /* ZFRainDropView.m */; };
 		DB27BAB31C72AD100027D8BA /* ZFGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB27BAB21C72AD100027D8BA /* ZFGradientView.m */; };
 		DB793B011C64878500CCDF7C /* FilmotypeGiant.otf in Resources */ = {isa = PBXBuildFile; fileRef = DB793B001C64878500CCDF7C /* FilmotypeGiant.otf */; };
@@ -125,6 +136,18 @@
 		DB0173071C7174A500411344 /* statistics-raindrop-yellow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "statistics-raindrop-yellow@2x.png"; sourceTree = "<group>"; };
 		DB0173081C7174A500411344 /* statistics-woman.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "statistics-woman.png"; sourceTree = "<group>"; };
 		DB0173091C7174A500411344 /* statistics-woman@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "statistics-woman@2x.png"; sourceTree = "<group>"; };
+		DB1A91C21C9BDE33007C9C7C /* main-menu-iphone-search-selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "main-menu-iphone-search-selected.png"; sourceTree = "<group>"; };
+		DB1A91C31C9BDE33007C9C7C /* main-menu-iphone-search-selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "main-menu-iphone-search-selected@2x.png"; sourceTree = "<group>"; };
+		DB1A91C41C9BDE33007C9C7C /* main-menu-iphone-search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "main-menu-iphone-search.png"; sourceTree = "<group>"; };
+		DB1A91C51C9BDE33007C9C7C /* main-menu-iphone-search@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "main-menu-iphone-search@2x.png"; sourceTree = "<group>"; };
+		DB1A91CA1C9BDE41007C9C7C /* main-menu-iphone-settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "main-menu-iphone-settings.png"; sourceTree = "<group>"; };
+		DB1A91CB1C9BDE41007C9C7C /* main-menu-iphone-settings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "main-menu-iphone-settings@2x.png"; sourceTree = "<group>"; };
+		DB1A91CC1C9BDE41007C9C7C /* main-menu-iphone-weather-selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "main-menu-iphone-weather-selected.png"; sourceTree = "<group>"; };
+		DB1A91CD1C9BDE41007C9C7C /* main-menu-iphone-weather-selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "main-menu-iphone-weather-selected@2x.png"; sourceTree = "<group>"; };
+		DB1A91CE1C9BDE41007C9C7C /* main-menu-iphone-weather.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "main-menu-iphone-weather.png"; sourceTree = "<group>"; };
+		DB1A91CF1C9BDE41007C9C7C /* main-menu-iphone-weather@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "main-menu-iphone-weather@2x.png"; sourceTree = "<group>"; };
+		DB1A91D61C9BE0F1007C9C7C /* ZFSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFSegmentedControl.h; sourceTree = "<group>"; };
+		DB1A91D71C9BE0F1007C9C7C /* ZFSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFSegmentedControl.m; sourceTree = "<group>"; };
 		DB27BAAE1C72A8000027D8BA /* ZFRainDropView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFRainDropView.h; sourceTree = "<group>"; };
 		DB27BAAF1C72A8000027D8BA /* ZFRainDropView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFRainDropView.m; sourceTree = "<group>"; };
 		DB27BAB11C72AD100027D8BA /* ZFGradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFGradientView.h; sourceTree = "<group>"; };
@@ -290,6 +313,16 @@
 		DB7C110E1C59B36600E467D8 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				DB1A91CA1C9BDE41007C9C7C /* main-menu-iphone-settings.png */,
+				DB1A91CB1C9BDE41007C9C7C /* main-menu-iphone-settings@2x.png */,
+				DB1A91CC1C9BDE41007C9C7C /* main-menu-iphone-weather-selected.png */,
+				DB1A91CD1C9BDE41007C9C7C /* main-menu-iphone-weather-selected@2x.png */,
+				DB1A91CE1C9BDE41007C9C7C /* main-menu-iphone-weather.png */,
+				DB1A91CF1C9BDE41007C9C7C /* main-menu-iphone-weather@2x.png */,
+				DB1A91C21C9BDE33007C9C7C /* main-menu-iphone-search-selected.png */,
+				DB1A91C31C9BDE33007C9C7C /* main-menu-iphone-search-selected@2x.png */,
+				DB1A91C41C9BDE33007C9C7C /* main-menu-iphone-search.png */,
+				DB1A91C51C9BDE33007C9C7C /* main-menu-iphone-search@2x.png */,
 				DBB1AB3F1C881E3900481B4A /* main-menu-toggle-arrow-iphone.png */,
 				DBB1AB401C881E3900481B4A /* main-menu-toggle-arrow-iphone@2x.png */,
 				DB0173041C7174A500411344 /* statistics-raindrop-blue.png */,
@@ -396,6 +429,8 @@
 				DB27BAAF1C72A8000027D8BA /* ZFRainDropView.m */,
 				DB27BAB11C72AD100027D8BA /* ZFGradientView.h */,
 				DB27BAB21C72AD100027D8BA /* ZFGradientView.m */,
+				DB1A91D61C9BE0F1007C9C7C /* ZFSegmentedControl.h */,
+				DB1A91D71C9BE0F1007C9C7C /* ZFSegmentedControl.m */,
 			);
 			path = ZFCityGuides;
 			sourceTree = "<group>";
@@ -555,6 +590,7 @@
 				DB793B311C648A0900CCDF7C /* main-menu-iphone-favorites-selected@2x.png in Resources */,
 				DB793B4B1C648A0900CCDF7C /* main-menu-iphone-wtd-selected@2x.png in Resources */,
 				DB0172FF1C716CAE00411344 /* about-icon@2x.png in Resources */,
+				DB1A91D51C9BDE41007C9C7C /* main-menu-iphone-weather@2x.png in Resources */,
 				DB793B441C648A0900CCDF7C /* main-menu-iphone-settings-selected.png in Resources */,
 				DB7C11521C59B36600E467D8 /* Main.storyboard in Resources */,
 				DB793B4A1C648A0900CCDF7C /* main-menu-iphone-wtd-selected.png in Resources */,
@@ -567,7 +603,9 @@
 				DB793B3E1C648A0900CCDF7C /* main-menu-iphone-photos.png in Resources */,
 				DB7C116B1C59B36600E467D8 /* location.jpg in Resources */,
 				DB793B471C648A0900CCDF7C /* main-menu-iphone-walks-selected@2x.png in Resources */,
+				DB1A91D11C9BDE41007C9C7C /* main-menu-iphone-settings@2x.png in Resources */,
 				DB793B351C648A0900CCDF7C /* main-menu-iphone-food-selected@2x.png in Resources */,
+				DB1A91C91C9BDE33007C9C7C /* main-menu-iphone-search@2x.png in Resources */,
 				DB793B421C648A0900CCDF7C /* main-menu-iphone-secrets.png in Resources */,
 				DB0172FA1C716C1A00411344 /* news-icon.png in Resources */,
 				DB01730C1C7174A500411344 /* statistics-raindrop-yellow.png in Resources */,
@@ -599,6 +637,7 @@
 				DB7C11691C59B36600E467D8 /* layout_grid@2x.png in Resources */,
 				DB7C116A1C59B36600E467D8 /* layout_slider@2x.png in Resources */,
 				DB7C11501C59B36600E467D8 /* Assets.xcassets in Resources */,
+				DB1A91C71C9BDE33007C9C7C /* main-menu-iphone-search-selected@2x.png in Resources */,
 				DB0173031C71706B00411344 /* statistics-hero@2x.png in Resources */,
 				DB7C11751C59B36600E467D8 /* shanghai.jpg in Resources */,
 				DB7C11561C59B36600E467D8 /* beijing.jpg in Resources */,
@@ -606,18 +645,24 @@
 				DB793B301C648A0900CCDF7C /* main-menu-iphone-favorites-selected.png in Resources */,
 				DB793B451C648A0900CCDF7C /* main-menu-iphone-settings-selected@2x.png in Resources */,
 				DB793B2E1C648A0900CCDF7C /* main-menu-iphone-essentials.png in Resources */,
+				DB1A91D01C9BDE41007C9C7C /* main-menu-iphone-settings.png in Resources */,
 				DB0172FE1C716CAE00411344 /* about-icon.png in Resources */,
+				DB1A91D41C9BDE41007C9C7C /* main-menu-iphone-weather.png in Resources */,
 				DB7C11511C59B36600E467D8 /* LaunchScreen.storyboard in Resources */,
 				DB01730A1C7174A500411344 /* statistics-raindrop-blue.png in Resources */,
 				DB793B4C1C648A0900CCDF7C /* main-menu-iphone-wtd.png in Resources */,
+				DB1A91C61C9BDE33007C9C7C /* main-menu-iphone-search-selected.png in Resources */,
 				DB793B2C1C648A0900CCDF7C /* main-menu-iphone-essentials-selected.png in Resources */,
+				DB1A91D31C9BDE41007C9C7C /* main-menu-iphone-weather-selected@2x.png in Resources */,
 				DB793B431C648A0900CCDF7C /* main-menu-iphone-secrets@2x.png in Resources */,
 				DB793B3C1C648A0900CCDF7C /* main-menu-iphone-photos-selected.png in Resources */,
 				DB793B2B1C648A0900CCDF7C /* main-menu-iphone-dyk@2x.png in Resources */,
 				DB793B3D1C648A0900CCDF7C /* main-menu-iphone-photos-selected@2x.png in Resources */,
+				DB1A91D21C9BDE41007C9C7C /* main-menu-iphone-weather-selected.png in Resources */,
 				DB793B341C648A0900CCDF7C /* main-menu-iphone-food-selected.png in Resources */,
 				DB793B4D1C648A0900CCDF7C /* main-menu-iphone-wtd@2x.png in Resources */,
 				DB7C11791C59B36600E467D8 /* Info.plist in Resources */,
+				DB1A91C81C9BDE33007C9C7C /* main-menu-iphone-search.png in Resources */,
 				DB793B391C648A0900CCDF7C /* main-menu-iphone-itineraries-selected@2x.png in Resources */,
 				DB793B331C648A0900CCDF7C /* main-menu-iphone-favorites@2x.png in Resources */,
 				DB793B401C648A0900CCDF7C /* main-menu-iphone-secrets-selected.png in Resources */,
@@ -691,6 +736,7 @@
 				DBF2EF711C6059250027B9B5 /* NavigationAnimationViewController.m in Sources */,
 				DBF2EF8E1C6059D00027B9B5 /* MainNavigationController.m in Sources */,
 				DBF2EF851C60597C0027B9B5 /* MainViewController.m in Sources */,
+				DB1A91D81C9BE0F1007C9C7C /* ZFSegmentedControl.m in Sources */,
 				DBF2EF731C6059250027B9B5 /* TabBarAnimationController.m in Sources */,
 				DB7C114F1C59B36600E467D8 /* AppDelegate.m in Sources */,
 				DB27BAB31C72AD100027D8BA /* ZFGradientView.m in Sources */,
