@@ -20,6 +20,7 @@
 
 @property (nonatomic, strong) UIFont *font;
 
+
 @end
 
 @implementation ZFSegmentedControl
@@ -73,22 +74,43 @@
         
     }
     sender.selected = YES;
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(clickSegmentedControlAtIndex:)]) {
+        [self.delegate clickSegmentedControlAtIndex:sender.tag];
+    }
 }
--(void)setImage:(UIImage *)image forSegmentAtIndex:(NSInteger)index{
+-(void)setNormalImage:(UIImage *)image forSegmentAtIndex:(NSInteger)index{
     
     UIView *segmentView = self.segmentItems[index];
+   
+    for (UIView *subView in segmentView.subviews) {
+        [subView removeFromSuperview];
+    }
     
+    UIButton *button = ((UIButton *)segmentView) ;
+    CGFloat itemWidth = self.frame.size.width / self.segmentItems.count;
+
+    [button setImage:image forState:UIControlStateNormal];
+    button.imageEdgeInsets = UIEdgeInsetsMake(0, (itemWidth - image.size.width)/2.0, 0, 0);
+
+}
+
+-(void)setSelectedImage:(UIImage *)image forSegmentAtIndex:(NSInteger)index{
     
+    UIView *segmentView = self.segmentItems[index];
     
     for (UIView *subView in segmentView.subviews) {
         [subView removeFromSuperview];
     }
     
     UIButton *button = ((UIButton *)segmentView) ;
-    [button setBackgroundImage:image forState:UIControlStateNormal];
-    button.imageView.contentMode = UIViewContentModeScaleToFill;
+    CGFloat itemWidth = self.frame.size.width / self.segmentItems.count;
+    
+    [button setImage:image forState:UIControlStateSelected];
+    button.imageEdgeInsets = UIEdgeInsetsMake(0, (itemWidth - image.size.width)/2.0, 0, 0);
     
 }
+
 
 -(void)setTitle:(NSString *)text forSegmentAtIndex:(NSInteger)index{
     
@@ -129,7 +151,6 @@
 -(void)layoutSubviews{
     
     [super layoutSubviews];
-    
     
     self.contentView.frame = self.bounds;
     
@@ -184,12 +205,18 @@
 - (UIImage *)createImageWithColor:(UIColor *)color
 {
     CGRect rect=CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
+    
     UIGraphicsBeginImageContext(rect.size);
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetFillColorWithColor(context, [color CGColor]);
     CGContextFillRect(context, rect);
     UIImage *theImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
+    
     return theImage;
 }
+
+
+
+
 @end

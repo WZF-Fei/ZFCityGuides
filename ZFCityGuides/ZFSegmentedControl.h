@@ -8,14 +8,28 @@
 
 #import <UIKit/UIKit.h>
 
+
+@protocol ZFSegmentedControlDelegate <NSObject>
+
+- (void)clickSegmentedControlAtIndex:(NSInteger)index;
+
+@end
+
+
 @interface ZFSegmentedControl : UIView
 
 @property (nonatomic,strong) UIColor *tintColor;
 
+@property (nonatomic,weak) id <ZFSegmentedControlDelegate> delegate;
+
+
+
 -(instancetype)initWithItems:(NSArray *)items;
 
-//-(void)setImage:(UIImage *)image forSegmentAtIndex:(NSInteger)index;
+-(void)setNormalImage:(UIImage *)image forSegmentAtIndex:(NSInteger)index;
 
-- (void)setTitleTextAttributes:(NSDictionary<NSString *,id> *)attributes forState:(UIControlState)state;
+-(void)setSelectedImage:(UIImage *)image forSegmentAtIndex:(NSInteger)index;
+
+-(void)setTitleTextAttributes:(NSDictionary<NSString *,id> *)attributes forState:(UIControlState)state;
 
 @end

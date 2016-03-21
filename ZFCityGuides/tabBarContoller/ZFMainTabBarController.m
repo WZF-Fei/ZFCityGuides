@@ -12,13 +12,14 @@
 #import "TabBarItemCell.h"
 #import "TabBarAnimationController.h"
 #import "MainNavigationController.h"
+#import "MainViewController.h"
 
 #import "EssentialsViewController.h"
 
 #import "ZFSegmentedControl.h"
 
 
-@interface ZFMainTabBarController ()<UICollectionViewDataSource,UICollectionViewDelegate,UIGestureRecognizerDelegate,UIViewControllerTransitioningDelegate>
+@interface ZFMainTabBarController ()<UICollectionViewDataSource,UICollectionViewDelegate,UIGestureRecognizerDelegate,UIViewControllerTransitioningDelegate,ZFSegmentedControlDelegate>
 
 @property (strong, nonatomic) UICollectionView *itemCollectView;
 
@@ -119,6 +120,7 @@
     segmentControl.layer.cornerRadius = 5.0;
     segmentControl.layer.masksToBounds = YES;
     segmentControl.tintColor = kTabItemBgSelected;
+    segmentControl.delegate = self;
     segmentControl.frame = CGRectMake(20, CGRectGetMinY(cityTime.frame) - 50 - 30, contentView.frame.size.width - 20*2, 50);
     [contentView addSubview:segmentControl];
     
@@ -127,7 +129,16 @@
     [segmentControl setTitleTextAttributes:normalDic forState:UIControlStateNormal];
     [segmentControl setTitleTextAttributes:selectedDic forState:UIControlStateSelected];
     
-  
+    // setImage for normal or selected states
+    [segmentControl setNormalImage:[UIImage imageNamed:@"main-menu-iphone-weather@2x"] forSegmentAtIndex:0];
+    [segmentControl setSelectedImage:[UIImage imageNamed:@"main-menu-iphone-weather-selected@2x"] forSegmentAtIndex:0];
+    
+    [segmentControl setNormalImage:[UIImage imageNamed:@"main-menu-iphone-search@2x"] forSegmentAtIndex:1];
+    [segmentControl setSelectedImage:[UIImage imageNamed:@"main-menu-iphone-search-selected@2x"] forSegmentAtIndex:1];
+    
+    [segmentControl setNormalImage:[UIImage imageNamed:@"main-menu-iphone-settings@2x"] forSegmentAtIndex:2];
+    [segmentControl setSelectedImage:[UIImage imageNamed:@"main-menu-iphone-settings-selected@2x"] forSegmentAtIndex:2];
+    
     
     //collectionview 布局
     UICollectionViewFlowLayout *flowLayout= [[UICollectionViewFlowLayout alloc] init];
@@ -455,5 +466,27 @@
     return YES;
 }
 
+
+#pragma mark - ZFSegmentedControlDelegate
+
+-(void)clickSegmentedControlAtIndex:(NSInteger)index{
+    
+    if (index == 3) {
+        
+        if ([self.presentingViewController isKindOfClass:[MainViewController class]]) {
+            [self dismissViewControllerAnimated:YES completion:NULL];
+            return;
+        }
+        
+        MainViewController *presentedVC = [MainViewController new];
+        presentedVC.transitioningDelegate = self;
+        __weak typeof(self) weakSelf = self;
+        
+        [self presentViewController:presentedVC animated:YES completion:^{
+            //remove presentingView
+            [weakSelf.presentingViewController.view removeFromSuperview];
+        }];
+    }
+}
 
 @end
