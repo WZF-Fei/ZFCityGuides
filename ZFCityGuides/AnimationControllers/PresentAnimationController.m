@@ -30,14 +30,32 @@
     UIView *toView = _toVC.view;
     UIView *fromView = fromVC.view;
     
-    [_toVC beginAppearanceTransition:YES animated:YES];
+    //fix 模态消失后导致UINavigationController 无动画转场
+    if ([_toVC isKindOfClass:[UINavigationController class]]) {
+        UIViewController *toVC =  ((UINavigationController *)_toVC).topViewController;
+        [toVC beginAppearanceTransition:YES animated:YES];
+    }
+    else{
+        
+        [_toVC beginAppearanceTransition:YES animated:YES];
+    }
+
     if(self.isDismissed){
         [self RunDismissAnimation:transitionContext fromVC:fromVC toVC:_toVC fromView:fromView toView:toView];
     } else {
         [self RunPresentAnimation:transitionContext fromVC:fromVC toVC:_toVC fromView:fromView toView:toView];
     }
 
-    [fromVC beginAppearanceTransition:NO animated:YES];
+    
+    if ([fromVC isKindOfClass:[UINavigationController class]]) {
+//        UIViewController *fromVC =  ((UINavigationController *)fromVC).topViewController;
+//        [fromVC beginAppearanceTransition:NO animated:YES];
+    }
+    else{
+        
+        [fromVC beginAppearanceTransition:NO animated:YES];
+    }
+
     
 }
 
@@ -154,7 +172,7 @@
         //解决背景变黑
         [[[UIApplication sharedApplication] keyWindow] addSubview:containerView];
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"showTopWindow" object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"showTopWindow" object:_toVC];
     }];
 
     
