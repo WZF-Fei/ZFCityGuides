@@ -23,8 +23,6 @@
 
 -(void)dealloc{
     
-    
-    NSLog(@"dealloc");
 }
 
 -(void)viewDidLoad{

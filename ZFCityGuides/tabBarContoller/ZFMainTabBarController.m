@@ -42,7 +42,7 @@
 
 -(void)dealloc{
     
-    
+    NSLog(@"%@---dealloc",self);
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kChangedFrame object:nil];
 }
 
@@ -50,7 +50,7 @@
     [super viewDidLoad];
     
 //        self.view.backgroundColor = [UIColor whiteColor];
-   
+
     UIView *contentView = [UIView new];
     contentView.backgroundColor = kContentViewBgColor;
     contentView.frame = CGRectMake(0, headerViewHeight, self.view.frame.size.width, self.view.frame.size.height - headerViewHeight);
@@ -473,19 +473,41 @@
     
     if (index == 3) {
         
-        if ([self.presentingViewController isKindOfClass:[MainViewController class]]) {
+        UIViewController *topViewController = ((UINavigationController *)self.presentingViewController).topViewController;
+        
+        //构造对象
+        Class className = [topViewController class];
+        //判断当前正要推出的视图控制器是否"MainViewController",是：dismiss; 否：重新推出MainViewController
+        if ([self.presentingViewController isKindOfClass:[MainViewController class]] || [className isSubclassOfClass:[MainViewController class]]) {
             [self dismissViewControllerAnimated:YES completion:NULL];
             return;
+        }
+
+        //remove topView
+        for (id subView in [UIApplication sharedApplication].keyWindow.subviews) {
+            if ([subView isMemberOfClass:[UIView class]]) {
+                [subView removeFromSuperview];
+            }
         }
         
         MainViewController *presentedVC = [MainViewController new];
         presentedVC.transitioningDelegate = self;
         __weak typeof(self) weakSelf = self;
         
-        [self presentViewController:presentedVC animated:YES completion:^{
-            //remove presentingView
+        
+        id viewController = [[className alloc] init];
+        
+        viewController = topViewController;
+        
+        [viewController pushNextViewController:presentedVC animated:NO];
+        
+
+        [self dismissViewControllerAnimated:YES completion:^{
+           
             [weakSelf.presentingViewController.view removeFromSuperview];
+            
         }];
+
     }
 }
 

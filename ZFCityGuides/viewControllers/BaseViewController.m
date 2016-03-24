@@ -28,8 +28,8 @@
 
 -(void)dealloc{
     
-    NSLog(@"%@--dealloc",self);
-     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"showTopWindow" object:nil];
+//    NSLog(@"%@--dealloc",self);
+     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"showTopWindow" object:self];
 
 }
 - (void)viewDidLoad {
@@ -79,6 +79,19 @@
 }
 
 -(void)showTopWindow:(NSNotification *)notification{
+    
+
+    if ([notification.object isKindOfClass:[MainNavigationController class]]) {
+        
+        UIViewController *currentViewController = ((UINavigationController *)notification.object).topViewController;
+        if ([currentViewController isKindOfClass:NSClassFromString(@"MainViewController")]) {
+            return;
+        }
+    }
+    else{
+        
+        return;
+    }
     
     [self.topWindow removeFromSuperview];
     self.topWindow = nil;

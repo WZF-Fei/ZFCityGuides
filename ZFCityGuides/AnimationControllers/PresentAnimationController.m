@@ -30,9 +30,11 @@
     UIView *toView = _toVC.view;
     UIView *fromView = fromVC.view;
     
+
     //fix 模态消失后导致UINavigationController 无动画转场
     if ([_toVC isKindOfClass:[UINavigationController class]]) {
         UIViewController *toVC =  ((UINavigationController *)_toVC).topViewController;
+
         [toVC beginAppearanceTransition:YES animated:YES];
     }
     else{
@@ -48,8 +50,8 @@
 
     
     if ([fromVC isKindOfClass:[UINavigationController class]]) {
-//        UIViewController *fromVC =  ((UINavigationController *)fromVC).topViewController;
-//        [fromVC beginAppearanceTransition:NO animated:YES];
+        UIViewController *fromVC1 =  ((UINavigationController *)fromVC).topViewController;
+        [fromVC1 beginAppearanceTransition:NO animated:YES];
     }
     else{
         
