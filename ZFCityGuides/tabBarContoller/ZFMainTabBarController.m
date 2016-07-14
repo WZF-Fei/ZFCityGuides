@@ -473,6 +473,13 @@
     
     if (index == 3) {
         
+        //不是UINavigationController类
+        if (![(UINavigationController *)self.presentingViewController isKindOfClass:[UINavigationController class]]) {
+            
+            [self dismissViewControllerAnimated:YES completion:NULL];
+            return;
+        }
+        
         UIViewController *topViewController = ((UINavigationController *)self.presentingViewController).topViewController;
         
         //构造对象
